@@ -36,7 +36,7 @@ public class MainScreen extends ScreenBeta
     {
         speed = fullWidth * 0.05f;
 
-        skin = new Skin(Gdx.files.internal("Skin/flat-earth/skin/flat-earth-ui.json"));
+        skin = new Skin(Gdx.files.internal("Skin/orange/skin/uiskin.json"));
         HUDTable = new Table();
         HUDTable.setSize(WINDOW_WIDTH  , WINDOW_HEIGHT * 0.06f);
         HUDTable.setPosition(0, WINDOW_HEIGHT * 0.93f);

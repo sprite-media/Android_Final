@@ -64,6 +64,7 @@ public class GameoverScreen extends ScreenBeta
 		    public boolean handle(Event event)
 		    {
 			    //Add screen transition
+			    MyGame.setActiveScreen(new MainScreen());
 			    return false;
 		    }
 	    });
@@ -74,6 +75,7 @@ public class GameoverScreen extends ScreenBeta
 		    public boolean handle(Event event)
 		    {
 			    //Add screen transition
+			    MyGame.setActiveScreen(new MainmenuScreen());
 			    return false;
 		    }
 	    });

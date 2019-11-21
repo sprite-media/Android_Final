@@ -32,6 +32,7 @@ public class Snake extends ActorBeta
         {
             character.isDead = true;
             character.remove();
+            MyGame.setActiveScreen(new GameoverScreen());
         }
 
         if(getTop() < 0)

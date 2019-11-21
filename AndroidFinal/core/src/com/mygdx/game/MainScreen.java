@@ -27,6 +27,7 @@ public class MainScreen extends ScreenBeta
     boolean isPasueScreenCreated = false;
 
     Character character;
+    Snake snake;
 
     float speed;
 
@@ -50,6 +51,7 @@ public class MainScreen extends ScreenBeta
         mainStage.addActor(HUDTable);
 
         character = new Character(WINDOW_WIDTH/2, WINDOW_HEIGHT/10, mainStage);
+        snake = new Snake(0, WINDOW_HEIGHT  * 0.9f, mainStage);
 
     }
 
@@ -61,6 +63,7 @@ public class MainScreen extends ScreenBeta
 
         ScreenInteraction();
         character.CharacterMove();
+        snake.SnakeMove(dt, character);
     }
 
     void ScreenInteraction()

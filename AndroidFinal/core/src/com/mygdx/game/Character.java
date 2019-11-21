@@ -11,7 +11,12 @@ public class Character extends ActorBeta
     String[] walkFileNames;
     float frameRate = 0.05f;
 
+    int attackImgNum = 9;
+    String[] attackFileNames;
+
     Vector2 size;
+
+    public boolean isDead = false;
 
     public Character(float x, float y, Stage stage)
     {
@@ -23,19 +28,23 @@ public class Character extends ActorBeta
             walkFileNames[i] = "Character/Walk/files/Walk"+ (i + 1) +".png";
         }
 
+        attackFileNames = new String[attackImgNum];
+        for(int i = 0; i < attackImgNum; i++)
+        {
+            attackFileNames[i] = "Character/Attack/files/attack000" + (i + 1) + ".png";
+        }
+
         size = new Vector2(7.5f, 10); //lower the number-> img size will become bigger ****
         size.x = Gdx.graphics.getWidth()/size.x;
         size.y = Gdx.graphics.getWidth()/size.y;
         setSize(size.x, size.y);
+
+        setBoundaryPolygon(4);
     }
 
     public void CharacterMove()
     {
-        if(Gdx.input.isTouched())
-        {
-
-        }
-        loadAnimationFromFiles(walkFileNames, frameRate, true);
+        loadAnimationFromFiles(attackFileNames, frameRate, true);
         setSize(size.x, size.y);
     }
 

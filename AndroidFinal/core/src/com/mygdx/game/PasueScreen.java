@@ -50,7 +50,7 @@ public class PasueScreen extends ActorBeta
         if(backToMainButton.isPressed() && !isBackToMainButtonPressed)
         {
             isBackToMainButtonPressed = true;
-            //GameBeta.setActiveScreen();
+            MyGame.setActiveScreen(new MainmenuScreen());
         }
     }
 

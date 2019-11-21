@@ -84,7 +84,7 @@ public class MainmenuScreen extends ScreenBeta {
             @Override
             public boolean handle(Event event) {
                 //TODO Implement GameplayScreen
-                //MyGame.setActiveScreen();
+                MyGame.setActiveScreen(new MainScreen());
                 return false;
             }
         });

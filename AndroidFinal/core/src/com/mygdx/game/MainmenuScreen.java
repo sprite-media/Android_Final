@@ -74,7 +74,7 @@ public class MainmenuScreen extends ScreenBeta {
         if(defaultBackgroundMusic == null)
         {
             defaultBackgroundMusic = Gdx.audio.newMusic(Gdx.files.internal("Audios/Bgm.mp3"));
-            defaultBackgroundMusic.setVolume(1f);
+            defaultBackgroundMusic.setVolume(volumeMultiplier);
             defaultBackgroundMusic.play();
             defaultBackgroundMusic.setLooping(true);
         }

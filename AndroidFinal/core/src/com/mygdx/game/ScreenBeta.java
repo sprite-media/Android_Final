@@ -63,6 +63,7 @@ public abstract class ScreenBeta implements Screen, InputProcessor
 
     //SOUNDS
     public static Music defaultBackgroundMusic;
+    public static float volumeMultiplier = 0.5f;
     Sound defaultSoundEffect;
 
     //BOOLEANS

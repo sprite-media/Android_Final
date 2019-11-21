@@ -2,6 +2,7 @@ package com.mygdx.game;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Event;
 import com.badlogic.gdx.scenes.scene2d.EventListener;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
@@ -10,6 +11,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Slider;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 
 public class SettingScreen extends ScreenBeta {
     //Skin
@@ -34,7 +36,6 @@ public class SettingScreen extends ScreenBeta {
     public void initialize() {
         //Aspect
         float ratio = fullWidth / 1080;
-
         //Skin
         orangeSkin = new Skin(Gdx.files.internal("Skin/orange/skin/uiskin.json"));
 
@@ -44,7 +45,7 @@ public class SettingScreen extends ScreenBeta {
         volumeSlider.getStyle().background.setMinHeight(25);
         volumeSlider.getStyle().knob.setMinHeight(50);
         volumeSlider.getStyle().knob.setMinWidth(50);
-        volumeSlider.setValue(0.5f);
+        volumeSlider.setValue(volumeMultiplier);
 
         //Title
         title = new Label("SETTING", orangeSkin);
@@ -85,6 +86,14 @@ public class SettingScreen extends ScreenBeta {
             public boolean handle(Event event) {
                 MyGame.setActiveScreen(new MainmenuScreen());
                 return false;
+            }
+        });
+
+        volumeSlider.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                volumeMultiplier = volumeSlider.getValue();
+                defaultBackgroundMusic.setVolume(volumeMultiplier);
             }
         });
     }

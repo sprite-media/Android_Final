@@ -11,8 +11,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 
 public class MainmenuScreen extends ScreenBeta {
-    //Background
-    Image background;
 
     //Skin
     Skin orangeSkin;
@@ -36,10 +34,6 @@ public class MainmenuScreen extends ScreenBeta {
 
         orangeSkin = new Skin(Gdx.files.internal("Skin/orange/skin/uiskin.json"));
 
-        //Background Image
-        background = new Image(new Texture(Gdx.files.internal("Textures/Background.png")));
-        background.setSize(fullWidth, fullHeight);
-        mainStage.addActor(background);
 
         //Title
         title = new Label("BLOCK VS SNAKE", orangeSkin);
@@ -108,7 +102,7 @@ public class MainmenuScreen extends ScreenBeta {
             @Override
             public boolean handle(Event event) {
                 //TODO Implement LeaderboardScreen
-                //MyGame.setActiveScreen();
+                MyGame.setActiveScreen(new LeaderboardScreen());
                 return false;
             }
         });

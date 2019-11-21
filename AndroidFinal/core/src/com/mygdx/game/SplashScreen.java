@@ -10,7 +10,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 public class SplashScreen extends ScreenBeta {
     Image spriteMediaSplashImg;
     Image libGdxSplashImg;
-    Image background;
 
     //Timer
     float timer;
@@ -19,11 +18,6 @@ public class SplashScreen extends ScreenBeta {
     public void initialize() {
         //Timer
         timer = 0.0f;
-
-        //Background Image
-        background = new Image(new Texture(Gdx.files.internal("Textures/Background.png")));
-        background.setSize(fullWidth, fullHeight);
-        uiStage.addActor(background);
 
         //Images
         spriteMediaSplashImg = new Image(new Texture(Gdx.files.internal("Textures/SpriteMedia.PNG")));

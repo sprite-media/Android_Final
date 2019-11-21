@@ -24,7 +24,7 @@ public class LeaderboardScreen extends ScreenBeta
 	@Override
 	public void initialize()
 	{
-		float ratio = Width / 400.0f;
+		float ratio = fullWidth / 400.0f;
 
 		pref = Gdx.app.getPreferences("MyPref");
 
@@ -33,9 +33,9 @@ public class LeaderboardScreen extends ScreenBeta
 
 		// Table
 		table = new Table(holo);
-		table.setSize(Width, Height);
+		table.setSize(fullWidth, fullHeight);
 		table.setFillParent(true);
-		table.setPosition(HalfWidth-table.getWidth()*0.5f, HalfHeight-table.getHeight()*0.5f);
+		table.setPosition(halfWidth-table.getWidth()*0.5f, halfHeight-table.getHeight()*0.5f);
 
 		Label title = new Label("Leaderboard", holo);
 		title.setFontScale(1.4f * ratio);
@@ -43,7 +43,7 @@ public class LeaderboardScreen extends ScreenBeta
 		back = new TextButton("Back", holo);
 		back.getLabel().setFontScale(ratio);
 
-		table.add(back).left().top().pad(Width*0.01f).colspan(2).row();
+		table.add(back).left().top().pad(fullWidth*0.01f).colspan(2).row();
 		table.add(title).expand().center().top().colspan(2).row();
 
 		rank = new Label[10];
@@ -62,6 +62,7 @@ public class LeaderboardScreen extends ScreenBeta
 			table.row();
 		}
 
+		InitButton();
 		mainStage.addActor(table);
 	}
 
@@ -73,6 +74,7 @@ public class LeaderboardScreen extends ScreenBeta
 		public boolean handle(Event event)
 		{
 			//Add screen transition
+			MyGame.setActiveScreen(new MainmenuScreen());
 			return false;
 		}
 	});

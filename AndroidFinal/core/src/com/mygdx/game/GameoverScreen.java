@@ -25,12 +25,12 @@ public class GameoverScreen extends ScreenBeta
 
 		// Initializing table
 		table = new Table(orange);
-		table.setSize(Width, Height);
+		table.setSize(fullWidth, fullHeight);
 		table.setFillParent(true);
-		table.setPosition(HalfWidth-table.getWidth()*0.5f, HalfHeight-table.getHeight()*0.4f);
+		table.setPosition(halfWidth-table.getWidth()*0.5f, halfHeight-table.getHeight()*0.4f);
 
 
-		float ratio = Width/400.0f;
+		float ratio = fullWidth/400.0f;
 
 		// Label
 	    Label gameoverText = new Label("GAME OVER", orange);
@@ -47,9 +47,9 @@ public class GameoverScreen extends ScreenBeta
 
 	    table.add(gameoverText);
 	    table.row();
-		table.add(restartButton).minSize(HalfWidth, Height*0.08f).padTop(HalfHeight*0.6f);
+		table.add(restartButton).minSize(halfWidth, fullHeight*0.08f).padTop(halfHeight*0.6f);
 		table.row();
-	    table.add(mainmenuButton).minSize(HalfWidth, Height*0.08f).padTop(HalfHeight*0.1f);
+	    table.add(mainmenuButton).minSize(halfWidth, fullHeight*0.08f).padTop(halfHeight*0.1f);
 		table.setColor(1,1,1,0);
 	    table.addAction(Actions.fadeIn(1.0f));
 

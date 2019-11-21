@@ -14,8 +14,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 public class SettingScreen extends ScreenBeta {
     //Skin
     Skin orangeSkin;
-    //Background
-    Image background;
 
     //Volume Icon
     Image volumeIcon;
@@ -51,11 +49,6 @@ public class SettingScreen extends ScreenBeta {
         //Title
         title = new Label("SETTING", orangeSkin);
         title.setFontScale(5 * ratio);
-
-        //Background Image
-        background = new Image(new Texture(Gdx.files.internal("Textures/Background.png")));
-        background.setSize(fullWidth, fullHeight);
-        mainStage.addActor(background);
 
         //Back Button
         backBtn = new TextButton("BACK", orangeSkin);

@@ -1,4 +1,13 @@
 package com.mygdx.game;
 
-public class MyGame extends GameBeta {
+import com.badlogic.gdx.Screen;
+
+public class MyGame extends GameBeta
+{
+	@Override
+	public void create()
+	{
+		super.create();
+		setActiveScreen(new GameoverScreen());
+	}
 }

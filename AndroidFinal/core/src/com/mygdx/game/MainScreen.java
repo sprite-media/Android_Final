@@ -79,7 +79,10 @@ public class MainScreen extends ScreenBeta
            if(pauseScreen.RestartGame())
                isPuaseScreenOn = false;
         }
-
+        if(isPasueScreenCreated)
+        {
+            pauseScreen.BackToMainMenu();
+        }
     }
 
 }

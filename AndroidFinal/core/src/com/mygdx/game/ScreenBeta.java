@@ -62,7 +62,7 @@ public abstract class ScreenBeta implements Screen, InputProcessor
     TextureRegion buttonRegion;
 
     //SOUNDS
-    Music defaultBackgroundMusic;
+    public static Music defaultBackgroundMusic;
     Sound defaultSoundEffect;
 
     //BOOLEANS

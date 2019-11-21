@@ -70,6 +70,15 @@ public class MainmenuScreen extends ScreenBeta {
         table.add(quitBtn).minWidth(fullWidth/5).minHeight(fullHeight/10).padBottom(fullHeight/25);
         mainStage.addActor(table);
 
+        //BGM
+        if(defaultBackgroundMusic == null)
+        {
+            defaultBackgroundMusic = Gdx.audio.newMusic(Gdx.files.internal("Audios/Bgm.mp3"));
+            defaultBackgroundMusic.setVolume(1f);
+            defaultBackgroundMusic.play();
+            defaultBackgroundMusic.setLooping(true);
+        }
+
         InitBtnListners();
     }
 

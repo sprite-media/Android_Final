@@ -27,6 +27,7 @@ public class MainScreen extends ScreenBeta
     boolean isPasueScreenCreated = false;
 
     Character character;
+    Snake snake;
 
     float speed;
 
@@ -35,7 +36,7 @@ public class MainScreen extends ScreenBeta
     {
         speed = fullWidth * 0.05f;
 
-        skin = new Skin(Gdx.files.internal("Skin/flat-earth/skin/flat-earth-ui.json"));
+        skin = new Skin(Gdx.files.internal("Skin/orange/skin/uiskin.json"));
         HUDTable = new Table();
         HUDTable.setSize(WINDOW_WIDTH  , WINDOW_HEIGHT * 0.06f);
         HUDTable.setPosition(0, WINDOW_HEIGHT * 0.93f);
@@ -50,6 +51,7 @@ public class MainScreen extends ScreenBeta
         mainStage.addActor(HUDTable);
 
         character = new Character(WINDOW_WIDTH/2, WINDOW_HEIGHT/10, mainStage);
+        snake = new Snake(0, WINDOW_HEIGHT  * 0.9f, mainStage);
 
     }
 
@@ -61,6 +63,7 @@ public class MainScreen extends ScreenBeta
 
         ScreenInteraction();
         character.CharacterMove();
+        snake.SnakeMove(dt, character);
     }
 
     void ScreenInteraction()

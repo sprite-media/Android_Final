@@ -26,6 +26,8 @@ public class MainScreen extends ScreenBeta
     boolean isPuaseScreenOn = false;
     boolean isPasueScreenCreated = false;
 
+    Character character;
+
     @Override
     public void initialize()
     {
@@ -43,12 +45,15 @@ public class MainScreen extends ScreenBeta
         HUDTable.add(scoreLabel).fill().expandY();
         mainStage.addActor(HUDTable);
 
+        character = new Character(WINDOW_WIDTH/2, WINDOW_HEIGHT/10, mainStage);
+
     }
 
     @Override
     public void update(float dt)
     {
         ScreenInteraction();
+        character.CharacterMove();
     }
 
     void ScreenInteraction()
@@ -77,14 +82,4 @@ public class MainScreen extends ScreenBeta
 
     }
 
-
-    public void IncreaseScore()
-    {
-        curScore++;
-    }
-
-    public void UpdateScore(int newScore)
-    {
-        curScore = newScore;
-    }
 }

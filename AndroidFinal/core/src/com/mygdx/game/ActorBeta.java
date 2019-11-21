@@ -165,9 +165,7 @@ public class ActorBeta extends Actor {
         else
             anim.setPlayMode(Animation.PlayMode.NORMAL);
 
-        //if animation is null, set the animation to a default state
-        if (animation == null)
-            setAnimation(anim);
+        setAnimation(anim);
 
         return anim;
     }

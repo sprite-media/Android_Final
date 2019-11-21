@@ -15,6 +15,7 @@ public class GameoverScreen extends ScreenBeta
     {
 		orange = new Skin(Gdx.files.internal("Skin/orange/skin/uiskin.json"));
 		uiTable = new Table(orange);
+
     }
 
     @Override

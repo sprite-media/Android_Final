@@ -33,7 +33,8 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
  * Created by markapptist on 2018-10-16.
  */
 
-public abstract class ScreenBeta implements Screen, InputProcessor {
+public abstract class ScreenBeta implements Screen, InputProcessor 
+{
 
     protected Stage mainStage;
     //Screensize
@@ -178,7 +179,7 @@ public abstract class ScreenBeta implements Screen, InputProcessor {
         update(delta);
         mainStage.setDebugAll(false);
 
-        Gdx.gl.glClearColor(0, 0.0f, 0.0f, 1.0f);
+        Gdx.gl.glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         mainStage.draw();

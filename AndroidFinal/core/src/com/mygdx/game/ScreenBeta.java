@@ -36,6 +36,11 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 public abstract class ScreenBeta implements Screen, InputProcessor {
 
     protected Stage mainStage;
+    //Screensize
+    public float fullWidth = Gdx.graphics.getWidth();
+    public float halfWidth = Gdx.graphics.getWidth()/2;
+    public float fullHeight = Gdx.graphics.getHeight();
+    public float halfHeight = Gdx.graphics.getHeight()/2;
 
     //UI
 

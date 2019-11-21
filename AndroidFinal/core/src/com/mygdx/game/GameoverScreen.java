@@ -3,6 +3,7 @@ package com.mygdx.game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.scenes.scene2d.Event;
 import com.badlogic.gdx.scenes.scene2d.EventListener;
+import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
@@ -49,6 +50,8 @@ public class GameoverScreen extends ScreenBeta
 		table.add(restartButton).minSize(HalfWidth, Height*0.08f).padTop(HalfHeight*0.6f);
 		table.row();
 	    table.add(mainmenuButton).minSize(HalfWidth, Height*0.08f).padTop(HalfHeight*0.1f);
+		table.setColor(1,1,1,0);
+	    table.addAction(Actions.fadeIn(1.0f));
 
 		mainStage.addActor(table);
     }

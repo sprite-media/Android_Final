@@ -28,9 +28,13 @@ public class MainScreen extends ScreenBeta
 
     Character character;
 
+    float speed;
+
     @Override
     public void initialize()
     {
+        speed = fullWidth * 0.05f;
+
         skin = new Skin(Gdx.files.internal("Skin/flat-earth/skin/flat-earth-ui.json"));
         HUDTable = new Table();
         HUDTable.setSize(WINDOW_WIDTH  , WINDOW_HEIGHT * 0.06f);
@@ -52,6 +56,9 @@ public class MainScreen extends ScreenBeta
     @Override
     public void update(float dt)
     {
+        //character.setPosition(character.getX()+(Gdx.input.getDeltaX()*dt*speed), character.getY());
+        character.moveBy((Gdx.input.getDeltaX()*dt*speed), 0);
+
         ScreenInteraction();
         character.CharacterMove();
     }

@@ -34,19 +34,24 @@ public class MainScreen extends ScreenBeta
     @Override
     public void initialize()
     {
+        //Ratio
+        float ratio = fullWidth / 1080;
         speed = fullWidth * 0.05f;
 
         skin = new Skin(Gdx.files.internal("Skin/orange/skin/uiskin.json"));
         HUDTable = new Table();
-        HUDTable.setSize(WINDOW_WIDTH  , WINDOW_HEIGHT * 0.06f);
+        HUDTable.setSize(WINDOW_WIDTH  , WINDOW_HEIGHT * 0.1f);
         HUDTable.setPosition(0, WINDOW_HEIGHT * 0.93f);
 
         scoreLabel = new Label("0", skin);
+        scoreLabel.setFontScale(5 * ratio);
+
         curScore = 0;
 
         pauseButton = new TextButton("Pause", skin);
+        pauseButton.getLabel().setFontScale(5 * ratio);
 
-        HUDTable.add(pauseButton).fill().expandY().padRight(WINDOW_WIDTH * 0.55f);
+        HUDTable.add(pauseButton).fill().expand().padRight(WINDOW_WIDTH * 0.55f);
         HUDTable.add(scoreLabel).fill().expandY();
         mainStage.addActor(HUDTable);
 

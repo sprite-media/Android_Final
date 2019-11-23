@@ -13,13 +13,10 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 
 public class Character extends ActorBeta
 {
-    float frameRate = 0.05f;
-
+    //Life
     Label lifeLabel;
     int life;
 
-    int attackImgNum = 9;
-    String[] attackFileNames;
 
     Vector2 size;
 

@@ -33,9 +33,33 @@ public class Snake
             tempNodeNum -= ranNum;
 
             snakeNodes = new SnakeNode[tempNodeNum];
-            for(int i = tempNodeNum - 1; i == 0; i--)
+            for(int i = 0; i < tempNodeNum; i++)
             {
+                snakeNodes
 
+                    if((random.nextInt(100) + 1) <= 5) //img 4 (21~30)
+                    {
+                        snakeNodes[i].fileNumber = 4;
+                    }
+                    else if((random.nextInt(100) + 1) <= 10) //img 3 (16~20)
+                    {
+
+                    }
+                    else if((random.nextInt(100) + 1) <= 20) //img 2 (11~15)
+                    {
+
+                    }
+                    else if((random.nextInt(100) + 1) <= 25) //img 1 (6~10)
+                    {
+
+                    }
+                    else //img 0 (1~5)
+                    {
+
+                    }
+
+                    snakeNodes[i].imgFileName = ""
+                }
             }
         }
     }

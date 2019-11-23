@@ -28,7 +28,7 @@ public class GameScreen extends ScreenBeta
     boolean isPuaseScreenOn = false;
     boolean isPasueScreenCreated = false;
 
-    Character character;
+    Character player;
     Snake snake;
     float speed;
 
@@ -56,20 +56,20 @@ public class GameScreen extends ScreenBeta
         HUDTable.add(scoreLabel).fill().expandY();
         mainStage.addActor(HUDTable);
 
-        character = new Character(WINDOW_WIDTH/2, WINDOW_HEIGHT/10, mainStage);
         snake = new Snake(WINDOW_HEIGHT, mainStage);
+        player = new Character(WINDOW_WIDTH/2, WINDOW_HEIGHT/10, mainStage, this);
     }
 
     @Override
     public void update(float dt)
     {
-        character.moveBy((Gdx.input.getDeltaX()*dt*speed), 0);
+        //character.setPosition(character.getX()+(Gdx.input.getDeltaX()*dt*speed), character.getY());
+        player.moveBy((Gdx.input.getDeltaX()*dt*speed), 0);
 
         snake.SnakeMovement(200 * dt, WINDOW_HEIGHT, mainStage);
 
         ScreenInteraction();
-        character.CharacterMove();
-
+        snake.SnakeMove(dt, player);
     }
 
     void ScreenInteraction()

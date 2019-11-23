@@ -1,10 +1,8 @@
 package com.mygdx.game;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.Event;
 import com.badlogic.gdx.scenes.scene2d.EventListener;
-import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
@@ -93,7 +91,7 @@ public class MainmenuScreen extends ScreenBeta {
             @Override
             public boolean handle(Event event) {
                 //TODO Implement GameplayScreen
-                MyGame.setActiveScreen(new MainScreen());
+                MyGame.setActiveScreen(new GameScreen());
                 return false;
             }
         });

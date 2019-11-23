@@ -9,7 +9,9 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.utils.Align;
 
-public class MainScreen extends ScreenBeta
+import java.util.ArrayList;
+
+public class GameScreen extends ScreenBeta
 {
     final static float WINDOW_WIDTH    = Gdx.graphics.getWidth();
     final static float WINDOW_HEIGHT   = Gdx.graphics.getHeight();
@@ -28,7 +30,6 @@ public class MainScreen extends ScreenBeta
 
     Character character;
     Snake snake;
-
     float speed;
 
     @Override
@@ -56,19 +57,19 @@ public class MainScreen extends ScreenBeta
         mainStage.addActor(HUDTable);
 
         character = new Character(WINDOW_WIDTH/2, WINDOW_HEIGHT/10, mainStage);
-        snake = new Snake(0, WINDOW_HEIGHT  * 0.9f, mainStage);
-
+        snake = new Snake(WINDOW_HEIGHT, mainStage);
     }
 
     @Override
     public void update(float dt)
     {
-        //character.setPosition(character.getX()+(Gdx.input.getDeltaX()*dt*speed), character.getY());
         character.moveBy((Gdx.input.getDeltaX()*dt*speed), 0);
+
+        snake.SnakeMovement(200 * dt, WINDOW_HEIGHT, mainStage);
 
         ScreenInteraction();
         character.CharacterMove();
-        snake.SnakeMove(dt, character);
+
     }
 
     void ScreenInteraction()

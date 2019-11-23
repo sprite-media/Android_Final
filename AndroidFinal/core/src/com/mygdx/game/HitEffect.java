@@ -36,8 +36,8 @@ public class HitEffect extends ActorBeta {
         size.x = Gdx.graphics.getWidth()/size.x;
         size.y = Gdx.graphics.getWidth()/size.y;
         setSize(size.x, size.y);
-
         setPosition(_player.getX() - this.getWidth()/2, _player.getY());
+        SpawnHitEffect();
         s.addActor(this);
     }
 

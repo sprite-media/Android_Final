@@ -131,7 +131,7 @@ public class Character extends ActorBeta
 
     public void GetPowerUp(int _ups)
     {
-        life++;
+        life += _ups;
         ChangeAnim();
     }
 

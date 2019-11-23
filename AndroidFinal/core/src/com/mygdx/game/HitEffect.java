@@ -33,9 +33,13 @@ public class HitEffect extends ActorBeta {
     HitEffect(Character _player, Stage s)
     {
         super();
+
         //Player
         player = _player;
+
+        //stage
         stage = s;
+
         //Set effects
         SetEffects();
         SpawnHitEffect();

@@ -40,6 +40,9 @@ public class Character extends ActorBeta
     Animation<TextureRegion> anim_steel;
     Animation<TextureRegion> anim_diamond;
 
+    //player center
+    Vector2 center;
+
     public Character(float x, float y, Stage stage, MainScreen _mainScreen)
     {
         super(x, y, stage);
@@ -53,6 +56,7 @@ public class Character extends ActorBeta
         //Player Animations
         SetAnim();
 
+        center = new Vector2(getWidth()/2, getHeight());
         //Life
         life = 1;
         Skin skin = new Skin(Gdx.files.internal("Skin/holo/skin/dark-hdpi/Holo-dark-hdpi.json"));
@@ -67,6 +71,8 @@ public class Character extends ActorBeta
 
         //Add Actors in the screen
         stage.addActor(lifeLabel);
+
+        HitEffect test = new HitEffect(this, stage);
 
         //Set boundary
         setBoundaryPolygon(4);
@@ -84,6 +90,7 @@ public class Character extends ActorBeta
         anim_diamond = this.loadAnimationFromFiles(diamond, 1/10f, false);
 
         setAnimation(anim_diamond);
+        b_animating = true;
     }
 
 
@@ -105,9 +112,9 @@ public class Character extends ActorBeta
         {
             setAnimation(anim_wood);
         }
+
+        b_animating = true;
     }
-
-
 
     public void GetHit(float _dmg)
     {
@@ -138,10 +145,7 @@ public class Character extends ActorBeta
     @Override
     public void act(float dt)
     {
-        if (isAnimationFinished() && b_animating)
-        {
-            b_animating = false;
-        }
+        super.act(dt);
 
         DisplayHud();
     }

@@ -15,24 +15,24 @@ public class PowerUp extends ActorBeta {
 
     //Position
     Random randPosX;
-    Random randPosY;
 
     int powerUp;
 
-
-    PowerUp(float x, float y, Stage s, Character _player)
+    PowerUp(Stage s, Character _player)
     {
         loadTexture("Character/Powerup.png");
 
         player = _player;
         //Set Position
-        setPosition(randPosX.nextInt(Gdx.graphics.getWidth()), randPosY.nextInt(Gdx.graphics.getHeight()) + Gdx.graphics.getHeight()/2);
+        setPosition(randPosX.nextInt(Gdx.graphics.getWidth()), Gdx.graphics.getHeight());
 
         //Set Size
         size = new Vector2(6, 6);
         size.x = Gdx.graphics.getWidth()/size.x;
         size.y = Gdx.graphics.getWidth()/size.y;
         setSize(size.x, size.y);
+
+        s.addActor(this);
     }
 
 

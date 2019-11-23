@@ -44,7 +44,7 @@ public class Character extends ActorBeta
 
     public void CharacterMove()
     {
-        loadAnimationFromFiles(attackFileNames, frameRate, true);
+       // loadAnimationFromFiles(attackFileNames, frameRate, true);
         setSize(size.x, size.y);
     }
 

@@ -1,43 +1,42 @@
 package com.mygdx.game;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
 
-public class Snake extends ActorBeta
+import java.util.Random;
+
+public class Snake
 {
-    final static float SPEED = -200;
-    Vector2 OriginalPos;
+    int nodeNum;
+    float nodeSize;
+
+    Table snakeTable;
+    SnakeNode[] snakeNodes;
 
     public Snake(float x, float y, Stage stage)
     {
-        super(x, y, stage);
+        float mapWidth = Gdx.graphics.getWidth();
+        nodeNum = 6;
+        nodeSize = mapWidth / nodeNum;
 
-        loadTexture("snakeTemp.png");
-        setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight() * 0.02f);
+        snakeTable = new Table();
+        snakeTable.setSize(mapWidth, nodeSize);
+        snakeTable.setPosition(x, y);
 
-        OriginalPos = new Vector2(x,y);
+        int tempNodeNum = nodeNum;
+        Random random = new Random();
 
-        setPosition(x, y);
-
-        setBoundaryPolygon(4);
-    }
-
-
-    public void SnakeMove(float dt, Character character)
-    {
-        setPosition(0, getY() + SPEED * dt);
-
-        if(character.overlaps(this))
+        while(tempNodeNum != 0)
         {
-            character.isDead = true;
-            character.remove();
-            MyGame.setActiveScreen(new GameoverScreen());
-        }
+            int ranNum = random.nextInt(tempNodeNum) + 1;
+            tempNodeNum -= ranNum;
 
-        if(getTop() < 0)
-        {
-            setPosition(OriginalPos.x, OriginalPos.y);
+            snakeNodes = new SnakeNode[tempNodeNum];
+            for(int i = tempNodeNum - 1; i == 0; i--)
+            {
+
+            }
         }
     }
 }

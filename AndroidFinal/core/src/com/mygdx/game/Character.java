@@ -17,7 +17,8 @@ public class Character extends ActorBeta
     Label lifeLabel;
     int life;
 
-
+    //Effect
+    HitEffect hitEffect;
     Vector2 size;
 
     //Death
@@ -53,7 +54,6 @@ public class Character extends ActorBeta
         //Player Animations
         SetAnim();
 
-        center = new Vector2(getWidth()/2, getHeight());
         //Life
         life = 1;
         Skin skin = new Skin(Gdx.files.internal("Skin/holo/skin/dark-hdpi/Holo-dark-hdpi.json"));
@@ -61,15 +61,18 @@ public class Character extends ActorBeta
         lifeLabel.setFontScale(1 * ratio);
         lifeLabel.setPosition(this.getX() - lifeLabel.getWidth()/2, this.getY() - lifeLabel.getHeight()/2);
 
+        //Player center and size
         size = new Vector2(6, 6);
         size.x = Gdx.graphics.getWidth()/size.x;
         size.y = Gdx.graphics.getWidth()/size.y;
         setSize(size.x, size.y);
 
+        center = new Vector2(getX() + (getWidth()/2), getY() + (getHeight()/2));
+
         //Add Actors in the screen
         stage.addActor(lifeLabel);
 
-        HitEffect test = new HitEffect(this, stage);
+        hitEffect = new HitEffect(this);
 
         //Set boundary
         setBoundaryPolygon(4);
@@ -110,16 +113,17 @@ public class Character extends ActorBeta
             setAnimation(anim_wood);
         }
 
-        b_animating = true;
+        hitEffect.SetEffect();
     }
 
     public void GetHit(float _dmg)
     {
         life -= _dmg;
+        ChangeAnim();
 
         if(life <= 0)
         {
-            //TODO Death
+            MyGame.setActiveScreen(new GameoverScreen());
             return;
         }
         mainScreen.curScore++;
@@ -128,7 +132,6 @@ public class Character extends ActorBeta
     public void GetPowerUp(int _ups)
     {
         life++;
-        lifeLabel.setText("" + life);
         ChangeAnim();
     }
 
@@ -136,6 +139,7 @@ public class Character extends ActorBeta
     public void DisplayHud()
     {
         //Player life
+        lifeLabel.setText("" + life);
         lifeLabel.setPosition(this.getX() + lifeLabel.getWidth(), this.getY() + lifeLabel.getHeight());
     }
 

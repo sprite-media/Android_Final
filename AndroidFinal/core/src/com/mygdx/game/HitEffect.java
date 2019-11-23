@@ -10,7 +10,6 @@ public class HitEffect extends ActorBeta {
     //Player
     Character player;
 
-    Stage stage;
 
     //Player EffectAnims
     String[] wood_Effect;
@@ -30,26 +29,18 @@ public class HitEffect extends ActorBeta {
     float timer = 0.0f;
     float lifeTime = 0.5f;
 
-    HitEffect(Character _player, Stage s)
+    HitEffect(Character _player)
     {
-        super();
-
         //Player
         player = _player;
 
-        //stage
-        stage = s;
-
         //Set effects
-        SetEffects();
-        SpawnHitEffect();
-        setSize(player.getWidth()*1.7f, player.getHeight()*1.7f);
-        setPosition(_player.getX() - (getWidth() - player.getWidth() )/2, player.getY());
+        LoadEffects();
+        SetEffect();
 
-        s.addActor(this);
     }
 
-    private void SetEffects()
+    private void LoadEffects()
     {
         wood_Effect = new String[] {"Effect/Spark_Wood_0.png", "Effect/Spark_Wood_1.png"};
         anim_wood_Effect = this.loadAnimationFromFiles(wood_Effect, 0.07f, true);
@@ -61,7 +52,7 @@ public class HitEffect extends ActorBeta {
         anim_diamond_Effect = this.loadAnimationFromFiles(diamond_Effect, 1/10f, true);
     }
 
-    public void SpawnHitEffect()
+    public void SetEffect()
     {
         if(player.life >= 30)
         {
@@ -79,23 +70,8 @@ public class HitEffect extends ActorBeta {
         {
             setAnimation(anim_wood_Effect);
         }
-
-        b_animating = true;
+        setSize(player.getWidth()*1.7f, player.getHeight()*1.7f);
+        setPosition(player.getX() - (getWidth() - player.getWidth() )/2, player.getY());
     }
 
-    @Override
-    public void act(float dt)
-    {
-
-        if(this == null)
-            return;
-
-        super.act(dt);
-
-        timer += dt;
-        if(timer >= lifeTime)
-        {
-            this.remove();
-        }
-    }
 }

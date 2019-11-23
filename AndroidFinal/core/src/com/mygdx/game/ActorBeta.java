@@ -19,6 +19,8 @@ import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Intersector.MinimumTranslationVector;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
+import java.util.ArrayList;
+
 /**
  *  Extend the Actor class to include graphics and collision detection.
  *  Actor class stores data such as position and rotation.
@@ -42,9 +44,6 @@ public class ActorBeta extends Actor {
     // stores size of game world for all actors
     static Rectangle worldBounds;
 
-    boolean b_animating = false;
-
-
     public ActorBeta() {
         super();
         textureRegion = new TextureRegion();
@@ -60,16 +59,6 @@ public class ActorBeta extends Actor {
         deceleration = 0;
 
         boundaryPolygon = null;
-    }
-
-    public Vector2 getPosition()
-    {
-        return new Vector2(getX(), getY());
-    }
-
-    public Vector2 GetPosition()
-    {
-        return new Vector2(getX(), getY());
     }
 
     public ActorBeta(float x, float y, Stage s) {
@@ -96,11 +85,6 @@ public class ActorBeta extends Actor {
         boundaryPolygon = null;
 
 
-    }
-
-    public void ResetElaspedTime()
-    {
-        elapsedTime = 0;
     }
 
     public void setTexture(Texture t) {
@@ -181,9 +165,7 @@ public class ActorBeta extends Actor {
         else
             anim.setPlayMode(Animation.PlayMode.NORMAL);
 
-        //if animation is null, set the animation to a default state
-        if (animation == null)
-            setAnimation(anim);
+        setAnimation(anim);
 
         return anim;
     }
@@ -378,7 +360,7 @@ public class ActorBeta extends Actor {
 
 
     /**
-     *  //SET BOUNDING BOX
+     *  //SET BOUNDING BOX 
      * @param width
      * @param height
      */
@@ -462,6 +444,25 @@ public class ActorBeta extends Actor {
         this.moveBy(mtv.normal.x * mtv.depth, mtv.normal.y * mtv.depth);
 
         return mtv.normal;
+    }
+
+    public static ArrayList<ActorBeta> getList(Stage stage, String className)
+    {
+        ArrayList<ActorBeta> list = new ArrayList<ActorBeta>();
+
+        Class theClass = null;
+        try
+        {  theClass = Class.forName(className);  }
+        catch (Exception error)
+        {  error.printStackTrace();  }
+
+        for (Actor a : stage.getActors())
+        {
+            if ( theClass.isInstance( a ) )
+                list.add( (ActorBeta)a );
+        }
+
+        return list;
     }
 
     /**

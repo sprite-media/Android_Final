@@ -178,7 +178,7 @@ public abstract class ScreenBeta implements Screen, InputProcessor
         uiStage.act(delta);
 
         update(delta);
-        mainStage.setDebugAll(true);
+        mainStage.setDebugAll(false);
 
         Gdx.gl.glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
@@ -186,7 +186,7 @@ public abstract class ScreenBeta implements Screen, InputProcessor
         mainStage.draw();
         uiStage.draw();
 
-        uiTable.setDebug(true);
+        uiTable.setDebug(false);
     }
 
     public boolean isTouchDownEvent(Event e) {

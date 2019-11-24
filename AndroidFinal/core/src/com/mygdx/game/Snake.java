@@ -158,11 +158,11 @@ public class Snake
         for(int i = 0; i < nodeNum; i++)
         {
             snakeNodes[i].setPosition(snakeNodes[i].getX(), curHeight);
-            snakeNodes[i].lifeLabel.setPosition(snakeNodes[i].getX(), snakeNodes[i].getY());
+            snakeNodes[i].lifeLabel.setPosition(snakeNodes[i].getX() , snakeNodes[i].getY());
         }
         if(curHeight < -nodeSize)
         {
-            curHeight = spawnHeight;
+            curHeight = y;
             SetShape(stage);
         }
     }

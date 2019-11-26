@@ -64,7 +64,7 @@ public class GameoverScreen extends ScreenBeta
 		    public boolean handle(Event event)
 		    {
 			    //Add screen transition
-			    MyGame.setActiveScreen(new MainScreen());
+			    MyGame.setActiveScreen(new GameScreen());
 			    return false;
 		    }
 	    });

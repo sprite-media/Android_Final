@@ -9,7 +9,9 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.utils.Align;
 
-public class MainScreen extends ScreenBeta
+import java.util.ArrayList;
+
+public class GameScreen extends ScreenBeta
 {
     final static float WINDOW_WIDTH    = Gdx.graphics.getWidth();
     final static float WINDOW_HEIGHT   = Gdx.graphics.getHeight();
@@ -27,8 +29,10 @@ public class MainScreen extends ScreenBeta
     boolean isPasueScreenCreated = false;
 
     Character character;
-    Snake snake;
-
+    int snakeNum;
+    float gap;
+    Snake[] snakes;
+    //Snake snake;
     float speed;
 
     @Override
@@ -55,20 +59,30 @@ public class MainScreen extends ScreenBeta
         HUDTable.add(scoreLabel).fill().expandY();
         mainStage.addActor(HUDTable);
 
-        character = new Character(WINDOW_WIDTH/2, WINDOW_HEIGHT/10, mainStage);
-        snake = new Snake(0, WINDOW_HEIGHT  * 0.9f, mainStage);
-
+        character = new Character(WINDOW_WIDTH/2, WINDOW_HEIGHT/10, mainStage, this);
+        //snake = new Snake(WINDOW_HEIGHT, mainStage);
+        snakeNum = 3;
+        gap = WINDOW_HEIGHT / snakeNum;
+        snakes = new Snake[snakeNum];
+        for(int i = 0; i < snakeNum; i++)
+        {
+            snakes[i] = new Snake(WINDOW_HEIGHT + (i * gap), mainStage);
+        }
     }
 
     @Override
     public void update(float dt)
     {
-        //character.setPosition(character.getX()+(Gdx.input.getDeltaX()*dt*speed), character.getY());
         character.moveBy((Gdx.input.getDeltaX()*dt*speed), 0);
 
+       // snake.SnakeMovement(200 * dt, WINDOW_HEIGHT, mainStage);
+        for(int i = 0; i < snakeNum; i++)
+        {
+            snakes[i].SnakeMovement(150 * dt, WINDOW_HEIGHT - (WINDOW_WIDTH /6), mainStage);
+        }
+
         ScreenInteraction();
-        character.CharacterMove();
-        snake.SnakeMove(dt, character);
+
     }
 
     void ScreenInteraction()

@@ -59,7 +59,7 @@ public class GameScreen extends ScreenBeta
         HUDTable.add(scoreLabel).fill().expandY();
         mainStage.addActor(HUDTable);
 
-        character = new Character(WINDOW_WIDTH/2, WINDOW_HEIGHT/10, mainStage);
+        character = new Character(WINDOW_WIDTH/2, WINDOW_HEIGHT/10, mainStage, this);
         //snake = new Snake(WINDOW_HEIGHT, mainStage);
         snakeNum = 3;
         gap = WINDOW_HEIGHT / snakeNum;
@@ -82,7 +82,6 @@ public class GameScreen extends ScreenBeta
         }
 
         ScreenInteraction();
-        character.CharacterMove();
 
     }
 

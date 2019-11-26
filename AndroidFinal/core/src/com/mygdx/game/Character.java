@@ -1,13 +1,10 @@
 package com.mygdx.game;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 
@@ -62,7 +59,7 @@ public class Character extends ActorBeta
         lifeLabel.setPosition(this.getX() - lifeLabel.getWidth()/2, this.getY() - lifeLabel.getHeight()/2);
 
         //Player center and size
-        size = new Vector2(6, 6);
+        size = new Vector2(12, 12);
         size.x = Gdx.graphics.getWidth()/size.x;
         size.y = Gdx.graphics.getWidth()/size.y;
         setSize(size.x, size.y);

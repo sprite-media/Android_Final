@@ -13,8 +13,9 @@ import java.util.ArrayList;
 
 public class GameScreen extends ScreenBeta
 {
-    final static float WINDOW_WIDTH    = Gdx.graphics.getWidth();
-    final static float WINDOW_HEIGHT   = Gdx.graphics.getHeight();
+    final static float WINDOW_WIDTH     = Gdx.graphics.getWidth();
+    final static float WINDOW_HEIGHT    = Gdx.graphics.getHeight();
+    public static float SPEED;
 
     PasueScreen pauseScreen;
 
@@ -38,6 +39,7 @@ public class GameScreen extends ScreenBeta
     @Override
     public void initialize()
     {
+        SPEED = 150;
         //Ratio
         float ratio = fullWidth / 1080;
         speed = fullWidth * 0.05f;
@@ -78,7 +80,7 @@ public class GameScreen extends ScreenBeta
        // snake.SnakeMovement(200 * dt, WINDOW_HEIGHT, mainStage);
         for(int i = 0; i < snakeNum; i++)
         {
-            snakes[i].SnakeMovement(150 * dt, WINDOW_HEIGHT - (WINDOW_WIDTH /6), mainStage);
+            snakes[i].SnakeMovement(SPEED * dt, WINDOW_HEIGHT - (WINDOW_WIDTH /6), mainStage);
         }
 
         ScreenInteraction();

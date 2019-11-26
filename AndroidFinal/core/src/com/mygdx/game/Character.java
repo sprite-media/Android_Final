@@ -89,8 +89,7 @@ public class Character extends ActorBeta
         diamond = new String[] {"Character/Player/Player_Diamond.png"};
         anim_diamond = this.loadAnimationFromFiles(diamond, 1/10f, false);
 
-        setAnimation(anim_diamond);
-        //b_animating = true;
+        setAnimation(anim_wood);
     }
 
 

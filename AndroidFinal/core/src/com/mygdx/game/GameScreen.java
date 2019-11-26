@@ -17,6 +17,8 @@ public class GameScreen extends ScreenBeta
     final static float WINDOW_HEIGHT    = Gdx.graphics.getHeight();
     public static float SPEED;
 
+    boolean isColliding;
+
     PasueScreen pauseScreen;
 
     Skin skin;
@@ -39,7 +41,8 @@ public class GameScreen extends ScreenBeta
     @Override
     public void initialize()
     {
-        SPEED = 150;
+        SPEED = 200;
+        isColliding = false;
         //Ratio
         float ratio = fullWidth / 1080;
         speed = fullWidth * 0.05f;
@@ -82,9 +85,8 @@ public class GameScreen extends ScreenBeta
         {
             snakes[i].SnakeMovement(SPEED * dt, WINDOW_HEIGHT - (WINDOW_WIDTH /6), mainStage);
         }
-
+        CollistionCheck();
         ScreenInteraction();
-
     }
 
     void ScreenInteraction()
@@ -116,4 +118,20 @@ public class GameScreen extends ScreenBeta
         }
     }
 
+    void CollistionCheck()
+    {
+        isColliding = false;
+        for(int i = 0; i < snakeNum; i++)
+        {
+            for(int j = 0; j < Snake.nodeNum; j++)
+            {
+                if(snakes[i].snakeNodes[j].Hit(character))
+                {
+                    isColliding = true;
+                    SPEED = 0;
+                }
+            }
+        }
+        if(!isColliding) SPEED = 200;
+    }
 }

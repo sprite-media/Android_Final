@@ -1,5 +1,6 @@
 package com.mygdx.game;
 
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 
@@ -7,7 +8,7 @@ import java.util.Random;
 
 public class Snake
 {
-    int nodeNum;
+    public static int nodeNum;
     public float nodeSize;
     boolean isPrevEmpty = false;
 

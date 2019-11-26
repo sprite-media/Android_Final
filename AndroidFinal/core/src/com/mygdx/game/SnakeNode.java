@@ -17,7 +17,6 @@ public class SnakeNode extends ActorBeta
     public boolean isEmpty = false;
     public Label lifeLabel;
     public int life = 0;
-    Character character;
 
     Skin skin;
 
@@ -38,9 +37,9 @@ public class SnakeNode extends ActorBeta
         setBoundaryRectangle();
     }
 
-    public boolean Hit(ActorBeta actorBeta)
+    public boolean Hit(Character character)
     {
-        if(this.overlaps(actorBeta))
+        if(this.overlaps(character))
         {
             return true;
         }

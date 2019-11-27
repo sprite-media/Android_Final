@@ -11,6 +11,7 @@ public class Snake
     public static int nodeNum;
     public float nodeSize;
     boolean isPrevEmpty = false;
+    public boolean isBelow;
 
     float curHeight;
     float spawnHeight;
@@ -37,6 +38,7 @@ public class Snake
 
     public void SetShape(Stage stage)
     {
+        isBelow = false;
         for(int i = 0; i < nodeNum; i++)
         {
             snakeNodes[i].lifeLabel.setText(" ");
@@ -162,11 +164,12 @@ public class Snake
             snakeNodes[i].setPosition(snakeNodes[i].getX(), curHeight);
             snakeNodes[i].lifeLabel.setPosition(snakeNodes[i].getX() , snakeNodes[i].getY());
         }
-        if(snakeNodes[0].getTop() - snakeNodes[0].getHeight()/2 < Character.yPos)
+        if(snakeNodes[0].getY() < Character.yPos)
         {
             for(int i = 0; i < nodeNum; i++)
             {
-                snakeNodes[i].isEmpty = true;
+                //snakeNodes[i].isEmpty = true;
+                isBelow = true;
             }
         }
         if(curHeight < -nodeSize)

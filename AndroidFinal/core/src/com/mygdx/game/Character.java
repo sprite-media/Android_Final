@@ -62,7 +62,7 @@ public class Character extends ActorBeta
         lifeLabel.setPosition(this.getX() - lifeLabel.getWidth()/2, this.getY() - lifeLabel.getHeight()/2);
 
         //Player center and size
-        size = new Vector2(12, 12);
+        size = new Vector2(18, 18);
         size.x = Gdx.graphics.getWidth()/size.x;
         size.y = Gdx.graphics.getWidth()/size.y;
         setSize(size.x, size.y);
@@ -113,7 +113,7 @@ public class Character extends ActorBeta
         }
 
         hitEffect.SetEffect();
-        size = new Vector2(12, 12);
+        size = new Vector2(18, 18);
         size.x = Gdx.graphics.getWidth()/size.x;
         size.y = Gdx.graphics.getWidth()/size.y;
         setSize(size.x, size.y);

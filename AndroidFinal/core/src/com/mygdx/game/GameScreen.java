@@ -82,6 +82,7 @@ public class GameScreen extends ScreenBeta
     @Override
     public void update(float dt)
     {
+        CollistionCheck(dt);
         character.moveBy((Gdx.input.getDeltaX()*dt*speed), 0);
 
        // snake.SnakeMovement(200 * dt, WINDOW_HEIGHT, mainStage);
@@ -89,7 +90,6 @@ public class GameScreen extends ScreenBeta
         {
             snakes[i].SnakeMovement(SPEED * dt, WINDOW_HEIGHT - (WINDOW_WIDTH /6), mainStage);
         }
-        CollistionCheck(dt);
         ScreenInteraction();
     }
 
@@ -129,7 +129,7 @@ public class GameScreen extends ScreenBeta
         {
             for(int j = 0; j < Snake.nodeNum; j++)
             {
-                if(snakes[i].snakeNodes[j].Hit(character))
+                if(!snakes[i].isBelow && snakes[i].snakeNodes[j].Hit(character))
                 {
                     curHitTime += dt;
                     if(curHitTime >= hitTime)
@@ -141,6 +141,26 @@ public class GameScreen extends ScreenBeta
                     isColliding = true;
                     SPEED = 0;
                     break;
+                }
+                else if(snakes[i].isBelow)
+                {
+                    if(snakes[i].snakeNodes[j].Hit(character))
+                    {
+                        if(character.getX() >= snakes[i].snakeNodes[j].getX()) //snake left player right
+                        {
+                            if(character.getX() < snakes[i].snakeNodes[j].getRight() && character.getRight() > snakes[i].snakeNodes[j].getRight())
+                            {
+                                character.setPosition(snakes[i].snakeNodes[j].getRight() + 1, character.getY());
+                            }
+                        }
+                        if(character.getRight() <= snakes[i].snakeNodes[j].getRight()) //snake right player left
+                        {
+                           if(character.getRight() > snakes[i].snakeNodes[j].getX())
+                           {
+                               character.setPosition(snakes[i].snakeNodes[j].getX() - character.getWidth() - 1, character.getY());
+                           }
+                        }
+                    }
                 }
             }
         }

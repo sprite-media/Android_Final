@@ -102,6 +102,7 @@ public class Snake
             snakeNodes[i].loadTexture(snakeNodes[i].imgFileName);
             stage.addActor(snakeNodes[i]);
             snakeNodes[i].setSize(nodeSize, nodeSize);
+            snakeNodes[i].setBoundaryRectangle();
         }
     }
 
@@ -160,6 +161,13 @@ public class Snake
         {
             snakeNodes[i].setPosition(snakeNodes[i].getX(), curHeight);
             snakeNodes[i].lifeLabel.setPosition(snakeNodes[i].getX() , snakeNodes[i].getY());
+        }
+        if(snakeNodes[0].getTop() - snakeNodes[0].getHeight()/2 < Character.yPos)
+        {
+            for(int i = 0; i < nodeNum; i++)
+            {
+                snakeNodes[i].isEmpty = true;
+            }
         }
         if(curHeight < -nodeSize)
         {

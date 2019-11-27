@@ -34,16 +34,28 @@ public class SnakeNode extends ActorBeta
 
         stage.addActor(lifeLabel);
 
-        setBoundaryRectangle();
+
     }
 
     public boolean Hit(Character character)
     {
-        if(this.overlaps(character))
+        if(character.overlaps(this) && !isEmpty)
         {
             return true;
         }
         else return false;
     }
 
+    public void GetHit(int _dmg)
+    {
+        life -= _dmg;
+        lifeLabel.setText(life);
+        if(life <= 0)
+        {
+            isEmpty = true;
+            loadTexture("Alpha.png");
+            lifeLabel.setText("");
+        }
+
+    }
 }

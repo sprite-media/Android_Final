@@ -10,6 +10,9 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 
 public class Character extends ActorBeta
 {
+    //y
+    public static float yPos;
+
     //Life
     Label lifeLabel;
     int life;
@@ -41,7 +44,7 @@ public class Character extends ActorBeta
     public Character(float x, float y, Stage stage, GameScreen _gameScreen)
     {
         super(x, y, stage);
-
+        yPos = y;
         //Ratio
         float ratio = Gdx.graphics.getWidth() / 400.0f;
 
@@ -52,7 +55,7 @@ public class Character extends ActorBeta
         SetAnim();
 
         //Life
-        life = 1;
+        life = 100;
         Skin skin = new Skin(Gdx.files.internal("Skin/holo/skin/dark-hdpi/Holo-dark-hdpi.json"));
         lifeLabel = new Label("" + life, skin);
         lifeLabel.setFontScale(1 * ratio);
@@ -72,7 +75,7 @@ public class Character extends ActorBeta
         hitEffect = new HitEffect(this);
 
         //Set boundary
-        setBoundaryPolygon(4);
+        setBoundaryRectangle();
     }
 
     public void SetAnim()
@@ -110,6 +113,10 @@ public class Character extends ActorBeta
         }
 
         hitEffect.SetEffect();
+        size = new Vector2(12, 12);
+        size.x = Gdx.graphics.getWidth()/size.x;
+        size.y = Gdx.graphics.getWidth()/size.y;
+        setSize(size.x, size.y);
     }
 
     public void GetHit(float _dmg)

@@ -18,6 +18,8 @@ public class GameScreen extends ScreenBeta
     public static float SPEED;
 
     boolean isColliding;
+    float hitTime;
+    float curHitTime;
 
     PasueScreen pauseScreen;
 
@@ -43,6 +45,8 @@ public class GameScreen extends ScreenBeta
     {
         SPEED = 200;
         isColliding = false;
+        hitTime = 0.1f;
+        curHitTime = 0.0f;
         //Ratio
         float ratio = fullWidth / 1080;
         speed = fullWidth * 0.05f;
@@ -85,7 +89,7 @@ public class GameScreen extends ScreenBeta
         {
             snakes[i].SnakeMovement(SPEED * dt, WINDOW_HEIGHT - (WINDOW_WIDTH /6), mainStage);
         }
-        CollistionCheck();
+        CollistionCheck(dt);
         ScreenInteraction();
     }
 
@@ -118,7 +122,7 @@ public class GameScreen extends ScreenBeta
         }
     }
 
-    void CollistionCheck()
+    void CollistionCheck(float dt)
     {
         isColliding = false;
         for(int i = 0; i < snakeNum; i++)
@@ -127,8 +131,16 @@ public class GameScreen extends ScreenBeta
             {
                 if(snakes[i].snakeNodes[j].Hit(character))
                 {
+                    curHitTime += dt;
+                    if(curHitTime >= hitTime)
+                    {
+                        curHitTime = 0;
+                        character.GetHit(1);
+                        snakes[i].snakeNodes[j].GetHit(1);
+                    }
                     isColliding = true;
                     SPEED = 0;
+                    break;
                 }
             }
         }

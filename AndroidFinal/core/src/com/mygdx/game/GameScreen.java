@@ -37,7 +37,6 @@ public class GameScreen extends ScreenBeta
     int snakeNum;
     float gap;
     Snake[] snakes;
-    //Snake snake;
     float speed;
 
     @Override
@@ -68,8 +67,7 @@ public class GameScreen extends ScreenBeta
         HUDTable.add(scoreLabel).fill().expandY();
         mainStage.addActor(HUDTable);
 
-        character = new Character(WINDOW_WIDTH/2, WINDOW_HEIGHT/10, mainStage, this);
-        //snake = new Snake(WINDOW_HEIGHT, mainStage);
+        character = new Character(WINDOW_WIDTH/2, WINDOW_HEIGHT/2, mainStage, this);
         snakeNum = 3;
         gap = WINDOW_HEIGHT / snakeNum;
         snakes = new Snake[snakeNum];
@@ -82,15 +80,15 @@ public class GameScreen extends ScreenBeta
     @Override
     public void update(float dt)
     {
+        ScreenInteraction();
+        if(isPuaseScreenOn) return;
         CollistionCheck(dt);
         character.moveBy((Gdx.input.getDeltaX()*dt*speed), 0);
 
-       // snake.SnakeMovement(200 * dt, WINDOW_HEIGHT, mainStage);
         for(int i = 0; i < snakeNum; i++)
         {
             snakes[i].SnakeMovement(SPEED * dt, WINDOW_HEIGHT - (WINDOW_WIDTH /6), mainStage);
         }
-        ScreenInteraction();
     }
 
     void ScreenInteraction()
@@ -129,6 +127,7 @@ public class GameScreen extends ScreenBeta
         {
             for(int j = 0; j < Snake.nodeNum; j++)
             {
+                snakes[i].snakeNodes[j].DestroyAtivated(dt);
                 if(!snakes[i].isBelow && snakes[i].snakeNodes[j].Hit(character))
                 {
                     curHitTime += dt;
@@ -136,7 +135,7 @@ public class GameScreen extends ScreenBeta
                     {
                         curHitTime = 0;
                         character.GetHit(1);
-                        snakes[i].snakeNodes[j].GetHit(1);
+                        snakes[i].HitSnake(j, 1);
                     }
                     isColliding = true;
                     SPEED = 0;

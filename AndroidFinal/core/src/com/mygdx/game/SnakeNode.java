@@ -17,6 +17,11 @@ public class SnakeNode extends ActorBeta
     public boolean isEmpty = false;
     public Label lifeLabel;
     public int life = 0;
+    public int killDmg = 0;
+    public boolean doDestory = false;
+
+    float frame = 0.05f;
+    float curFrame = 0.0f;
 
     Skin skin;
 
@@ -31,10 +36,7 @@ public class SnakeNode extends ActorBeta
         lifeLabel.setAlignment(Align.center);
         lifeLabel.setPosition(x, y);
 
-
         stage.addActor(lifeLabel);
-
-
     }
 
     public boolean Hit(Character character)
@@ -46,16 +48,32 @@ public class SnakeNode extends ActorBeta
         else return false;
     }
 
-    public void GetHit(int _dmg)
+    public boolean GetHit(int _dmg)
     {
         life -= _dmg;
         lifeLabel.setText(life);
         if(life <= 0)
         {
+            life = 0;
             isEmpty = true;
             loadTexture("Alpha.png");
             lifeLabel.setText("");
+            return true;
         }
-
+        return false;
     }
+
+    public void DestroyAtivated(float dt)
+    {
+        if(doDestory && life > 0)
+        {
+            curFrame += dt;
+            if(curFrame >= frame)
+            {
+                curFrame = 0;
+                GetHit(life);
+            }
+        }
+    }
+
 }

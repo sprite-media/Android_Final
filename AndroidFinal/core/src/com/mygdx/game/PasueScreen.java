@@ -11,7 +11,7 @@ import com.badlogic.gdx.utils.Align;
 
 public class PasueScreen extends ActorBeta
 {
-    Table pauseTable;
+    public Table pauseTable;
     Label pauseLabel;
     public TextButton restartButton;
     TextButton backToMainButton;
@@ -26,8 +26,7 @@ public class PasueScreen extends ActorBeta
         setSize(sizeX, sizeY);
 
         //Ratio
-        float ratio = Gdx.graphics.getWidth() / 1080;
-        int heightSegment = 7;
+        float ratio = Gdx.graphics.getWidth() / 1080.0f;
 
         pauseTable = new Table();
         pauseTable.setSize(sizeX, sizeY);
@@ -42,12 +41,9 @@ public class PasueScreen extends ActorBeta
         backToMainButton = new TextButton("BACK TO MAIN MENU", skin);
         backToMainButton.getLabel().setFontScale(5 * ratio);
 
-        pauseTable.add(pauseLabel).minHeight(Gdx.graphics.getWidth()/10).minWidth(Gdx.graphics.getWidth()/2).padBottom(Gdx.graphics.getHeight()/10).align(0).row();
-        pauseTable.add(restartButton).minHeight(Gdx.graphics.getWidth()/10).minWidth(Gdx.graphics.getWidth()/2).padBottom(Gdx.graphics.getHeight()/25).row();
-        pauseTable.add(backToMainButton).minHeight(Gdx.graphics.getWidth()/10).minWidth(Gdx.graphics.getWidth()/2).padBottom(Gdx.graphics.getHeight()/25).row();
-        //pauseTable.add(pauseLabel).fill().expand().padBottom(sizeY/heightSegment*3).row();
-        //pauseTable.add(restartButton).fill().padBottom(sizeY/heightSegment).row();
-        //pauseTable.add(backToMainButton).fill().padBottom(sizeY/heightSegment).row();
+        pauseTable.add(pauseLabel).minHeight(Gdx.graphics.getWidth()/10.0f).minWidth(Gdx.graphics.getWidth()/2.0f).padBottom(Gdx.graphics.getHeight()/10.0f).align(0).row();
+        pauseTable.add(restartButton).minHeight(Gdx.graphics.getWidth()/10.0f).minWidth(Gdx.graphics.getWidth()/2.0f).padBottom(Gdx.graphics.getHeight()/25.0f).row();
+        pauseTable.add(backToMainButton).minHeight(Gdx.graphics.getWidth()/10.0f).minWidth(Gdx.graphics.getWidth()/2.0f).padBottom(Gdx.graphics.getHeight()/25.0f).row();
         pauseTable.setColor(1, 1, 1,0);
         pauseTable.addAction(Actions.fadeIn(1.0f));
 

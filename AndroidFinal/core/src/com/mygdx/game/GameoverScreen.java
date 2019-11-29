@@ -15,12 +15,15 @@ public class GameoverScreen extends ScreenBeta
 	Table table;
 	TextButton restartButton;
 	TextButton mainmenuButton;
+	Label scoreLabel;
 
 
     @Override
     public void initialize()
     {
-    	// Loading skin
+		float ratio = fullWidth / 400.0f;
+
+		// Loading skin
 		orange = new Skin(Gdx.files.internal("Skin/orange/skin/uiskin.json"));
 
 		// Initializing table
@@ -29,8 +32,9 @@ public class GameoverScreen extends ScreenBeta
 		table.setFillParent(true);
 		table.setPosition(halfWidth-table.getWidth()*0.5f, halfHeight-table.getHeight()*0.4f);
 
+		scoreLabel = new Label("YOUR SCORE: " + GameScreen.curScore, orange);
+		scoreLabel.setFontScale(2*ratio);
 
-		float ratio = fullWidth/400.0f;
 
 		// Label
 	    Label gameoverText = new Label("GAME OVER", orange);
@@ -46,6 +50,8 @@ public class GameoverScreen extends ScreenBeta
 	    InitButton();
 
 	    table.add(gameoverText);
+	    table.row();
+	    table.add(scoreLabel).minSize(fullWidth, fullHeight*0.08f).padTop(halfHeight*0.6f).padLeft(halfWidth);
 	    table.row();
 		table.add(restartButton).minSize(halfWidth, fullHeight*0.08f).padTop(halfHeight*0.6f);
 		table.row();

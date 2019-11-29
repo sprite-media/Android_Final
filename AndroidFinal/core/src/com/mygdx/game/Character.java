@@ -1,6 +1,7 @@
 package com.mygdx.game;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
@@ -55,7 +56,7 @@ public class Character extends ActorBeta
         SetAnim();
 
         //Life
-        life = 100;
+        life = 1;
         Skin skin = new Skin(Gdx.files.internal("Skin/holo/skin/dark-hdpi/Holo-dark-hdpi.json"));
         lifeLabel = new Label("" + life, skin);
         lifeLabel.setFontScale(1 * ratio);
@@ -133,10 +134,48 @@ public class Character extends ActorBeta
         getStage().addActor(hitEffect);
         if(life <= 0)
         {
-            MyGame.setActiveScreen(new GameoverScreen());
+            GameOver();
             return;
         }
-        gameScreen.curScore++;
+
+    }
+
+    public void GameOver()
+    {
+        CheckScore();
+        MyGame.setActiveScreen(new GameoverScreen());
+    }
+
+    public void CheckScore()
+    {
+        Preferences pref;
+        pref = Gdx.app.getPreferences("MyPref");
+        int score[];
+        score = new int[10];
+
+        for(int i = 0; i < score.length; i++)
+        {
+            score[i] = pref.getInteger(Integer.toString(i));
+        }
+
+        for(int i = 0; i < score.length; i++)
+        {
+            if(GameScreen.curScore > score[i])
+            {
+                for(int j = 9; j > i; j--)
+                {
+                    score[j] = score[j-1];
+                }
+                score[i] = GameScreen.curScore;
+                break;
+            }
+        }
+
+        for(int i = 0; i < score.length; i++)
+        {
+            pref.putInteger(Integer.toString(i), score[i]);
+            pref.flush();
+        }
     }
 
     public void GetPowerUp(int _ups)

@@ -58,8 +58,8 @@ public class SnakeNode extends ActorBeta
     {
         life -= _dmg;
         lifeLabel.setText(life);
-        
-        GameScreen.curScore += _dmg/2;
+
+        GameScreen.curScore += _dmg;
 
         if(life <= 0)
         {

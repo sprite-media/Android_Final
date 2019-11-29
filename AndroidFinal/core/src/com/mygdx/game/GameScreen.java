@@ -74,8 +74,6 @@ public class GameScreen extends ScreenBeta
 
         curScore = 0;
 
-        //pauseButton = new TextButton("Pause", skin);
-        //pauseButton.getLabel().setFontScale(5 * ratio);
         Texture pauseTexture = new Texture("Textures/PauseButton.png");
         TextureRegion pauseTextureRegion = new TextureRegion(pauseTexture);
         TextureRegionDrawable pauseTextureRegionDrawable = new TextureRegionDrawable(pauseTextureRegion);

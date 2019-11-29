@@ -1,13 +1,22 @@
 package com.mygdx.game;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Sound;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Action;
+import com.badlogic.gdx.scenes.scene2d.ui.Button;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
+import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Align;
 
 import java.util.ArrayList;
@@ -27,7 +36,8 @@ public class GameScreen extends ScreenBeta
     Skin skin;
     Table HUDTable;
     Label scoreLabel;
-    TextButton pauseButton;
+    //TextButton pauseButton;
+    ImageButton pauseButton;
 
 
 
@@ -43,12 +53,20 @@ public class GameScreen extends ScreenBeta
     Snake[] snakes;
     float speed;
 
+    Sound buttonClick;
+    Sound hitSound;
 
     //PowerUp
     PowerUp powerUp;
     @Override
     public void initialize()
     {
+        buttonClick = Gdx.audio.newSound(Gdx.files.internal("Audios/ButtonPressed.mp3"));
+        buttonClick.setVolume(0, volumeMultiplier);
+
+        hitSound = Gdx.audio.newSound(Gdx.files.internal("Audios/ButtonPressed.mp3"));
+        hitSound.setVolume(0, volumeMultiplier);
+
         SPEED = 500;
         isColliding = false;
         hitTime = 0.01f;
@@ -68,12 +86,16 @@ public class GameScreen extends ScreenBeta
 
 
 
-        pauseButton = new TextButton("Pause", skin);
-        pauseButton.getLabel().setFontScale(5 * ratio);
+        Texture pauseTexture = new Texture("Textures/PauseButton.png");
+        TextureRegion pauseTextureRegion = new TextureRegion(pauseTexture);
+        TextureRegionDrawable pauseTextureRegionDrawable = new TextureRegionDrawable(pauseTextureRegion);
+        pauseTextureRegionDrawable.setMinWidth(WINDOW_WIDTH * 0.1f);
+        pauseTextureRegionDrawable.setMinHeight(WINDOW_HEIGHT * 0.1f);
+        pauseButton = new ImageButton(pauseTextureRegionDrawable);
+
 
         HUDTable.add(pauseButton).fill().expand().padRight(WINDOW_WIDTH * 0.55f);
         HUDTable.add(scoreLabel).fill().expandY();
-        mainStage.addActor(HUDTable);
 
         character = new Character(WINDOW_WIDTH/2, WINDOW_HEIGHT/2, mainStage, this);
 
@@ -85,6 +107,8 @@ public class GameScreen extends ScreenBeta
             snakes[i] = new Snake(WINDOW_HEIGHT + (i * gap), mainStage, character);
         }
 
+
+        mainStage.addActor(HUDTable);
 
     }
 
@@ -121,6 +145,7 @@ public class GameScreen extends ScreenBeta
                 mainStage.addActor(pauseScreen);
                 pauseScreen.ReactivatePasueScreen(mainStage, WINDOW_WIDTH, WINDOW_HEIGHT);
             }
+            buttonClick.play();
             isPuaseScreenOn = true;
             isPasueScreenCreated = true;
         }
@@ -148,6 +173,7 @@ public class GameScreen extends ScreenBeta
                 {
                     snakes[i].snakeNodes[j].blood.isActivated = true;
                     snakes[i].snakeNodes[j].blood.justKilled = false;
+                    hitSound.play();
                 }
                 snakes[i].DestoryInDelay(dt);
                 snakes[i].snakeNodes[j].blood.PlayAnimation(snakes[i].snakeNodes[j].getX(),

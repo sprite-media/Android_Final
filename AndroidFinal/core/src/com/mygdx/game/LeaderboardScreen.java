@@ -2,6 +2,7 @@ package com.mygdx.game;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Preferences;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.scenes.scene2d.Event;
 import com.badlogic.gdx.scenes.scene2d.EventListener;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
@@ -21,10 +22,15 @@ public class LeaderboardScreen extends ScreenBeta
 
 	Preferences pref;
 
+	Sound buttonClick;
+
 	@Override
 	public void initialize()
 	{
 		float ratio = fullWidth / 400.0f;
+
+		buttonClick = Gdx.audio.newSound(Gdx.files.internal("Audios/ButtonPressed.mp3"));
+		buttonClick.setVolume(0, volumeMultiplier);
 
 		pref = Gdx.app.getPreferences("MyPref");
 
@@ -74,6 +80,7 @@ public class LeaderboardScreen extends ScreenBeta
 		public boolean handle(Event event)
 		{
 			//Add screen transition
+			buttonClick.play();
 			MyGame.setActiveScreen(new MainmenuScreen());
 			return false;
 		}

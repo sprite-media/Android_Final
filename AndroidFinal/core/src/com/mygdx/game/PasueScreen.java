@@ -1,13 +1,13 @@
 package com.mygdx.game;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
-import com.badlogic.gdx.utils.Align;
 
 public class PasueScreen extends ActorBeta
 {
@@ -17,6 +17,8 @@ public class PasueScreen extends ActorBeta
     TextButton backToMainButton;
     boolean isBackToMainButtonPressed = false;
     public boolean isRestartButtonPressed = false;
+
+    Sound buttonClick;
 
     public PasueScreen(float x, float y, float sizeX, float sizeY, Stage stage, Skin skin)
     {
@@ -33,6 +35,8 @@ public class PasueScreen extends ActorBeta
         pauseTable.setPosition(0,0);
         pauseTable.center();
 
+        buttonClick = Gdx.audio.newSound(Gdx.files.internal("Audios/ButtonPressed.mp3"));
+        buttonClick.setVolume(0, ScreenBeta.volumeMultiplier);
 
         pauseLabel = new Label("PAUSE", skin);
         pauseLabel.setFontScale(10 * ratio);
@@ -63,6 +67,7 @@ public class PasueScreen extends ActorBeta
     {
         if(restartButton.isPressed() && !isRestartButtonPressed)
         {
+            buttonClick.play();
             isRestartButtonPressed = true;
             remove();
             pauseTable.remove();
@@ -73,6 +78,7 @@ public class PasueScreen extends ActorBeta
 
     public void ReactivatePasueScreen(Stage stage, float sizeX, float sizeY)
     {
+        buttonClick.play();
         int heightSegment = 10;
 
         pauseTable = new Table();

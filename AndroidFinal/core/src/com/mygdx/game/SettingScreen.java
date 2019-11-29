@@ -1,6 +1,7 @@
 package com.mygdx.game;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Event;
@@ -32,12 +33,17 @@ public class SettingScreen extends ScreenBeta {
     //Slider
     Slider volumeSlider;
 
+    Sound buttonClick;
+
     @Override
     public void initialize() {
         //Aspect
         float ratio = fullWidth / 1080;
         //Skin
         orangeSkin = new Skin(Gdx.files.internal("Skin/orange/skin/uiskin.json"));
+
+        buttonClick = Gdx.audio.newSound(Gdx.files.internal("Audios/ButtonPressed.mp3"));
+        buttonClick.setVolume(0, volumeMultiplier);
 
         //Volume
         volumeIcon = new Image(new Texture(Gdx.files.internal("Textures/VolumeIcon.png")));
@@ -84,6 +90,7 @@ public class SettingScreen extends ScreenBeta {
         backBtn.addListener(new EventListener() {
             @Override
             public boolean handle(Event event) {
+                buttonClick.play();
                 MyGame.setActiveScreen(new MainmenuScreen());
                 return false;
             }
@@ -92,6 +99,7 @@ public class SettingScreen extends ScreenBeta {
         volumeSlider.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
+                buttonClick.play();
                 volumeMultiplier = volumeSlider.getValue();
                 defaultBackgroundMusic.setVolume(volumeMultiplier);
             }

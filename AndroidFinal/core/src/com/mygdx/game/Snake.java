@@ -22,8 +22,14 @@ public class Snake
     float curDestroyDelay = 0.0f;
 
 
-    public Snake(float y, Stage stage)
+    //
+    PowerUp powerUp;
+
+    Character player;
+    public Snake(float y, Stage stage, Character _player)
     {
+        player = _player;
+
         float mapWidth = Gdx.graphics.getWidth();
         nodeNum = 6;
         nodeSize = mapWidth / nodeNum;
@@ -107,6 +113,9 @@ public class Snake
             snakeNodes[i].setSize(nodeSize, nodeSize);
             snakeNodes[i].setBoundaryRectangle();
         }
+
+        powerUp = new PowerUp(stage, player, spawnHeight);
+        stage.addActor(powerUp);
     }
 
     private int GetFileNum()

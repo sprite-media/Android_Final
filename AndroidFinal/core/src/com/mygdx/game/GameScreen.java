@@ -44,6 +44,8 @@ public class GameScreen extends ScreenBeta
     float speed;
 
 
+    //PowerUp
+    PowerUp powerUp;
     @Override
     public void initialize()
     {
@@ -72,15 +74,16 @@ public class GameScreen extends ScreenBeta
         HUDTable.add(scoreLabel).fill().expandY();
         mainStage.addActor(HUDTable);
 
+        character = new Character(WINDOW_WIDTH/2, WINDOW_HEIGHT/2, mainStage, this);
+
         snakeNum = 3;
         gap = WINDOW_HEIGHT / snakeNum;
         snakes = new Snake[snakeNum];
         for(int i = 0; i < snakeNum; i++)
         {
-            snakes[i] = new Snake(WINDOW_HEIGHT + (i * gap), mainStage);
+            snakes[i] = new Snake(WINDOW_HEIGHT + (i * gap), mainStage, character);
         }
 
-        character = new Character(WINDOW_WIDTH/2, WINDOW_HEIGHT/2, mainStage, this);
 
     }
 

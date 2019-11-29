@@ -1,6 +1,7 @@
 package com.mygdx.game;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.scenes.scene2d.Event;
 import com.badlogic.gdx.scenes.scene2d.EventListener;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
@@ -15,6 +16,8 @@ public class GameoverScreen extends ScreenBeta
 	Table table;
 	TextButton restartButton;
 	TextButton mainmenuButton;
+
+	Sound buttonClick;
 
 
     @Override
@@ -45,6 +48,9 @@ public class GameoverScreen extends ScreenBeta
 
 	    InitButton();
 
+		buttonClick = Gdx.audio.newSound(Gdx.files.internal("Audios/ButtonPressed.mp3"));
+		buttonClick.setVolume(0, volumeMultiplier);
+
 	    table.add(gameoverText);
 	    table.row();
 		table.add(restartButton).minSize(halfWidth, fullHeight*0.08f).padTop(halfHeight*0.6f);
@@ -64,6 +70,7 @@ public class GameoverScreen extends ScreenBeta
 		    public boolean handle(Event event)
 		    {
 			    //Add screen transition
+				buttonClick.play();
 			    MyGame.setActiveScreen(new GameScreen());
 			    return false;
 		    }
@@ -75,6 +82,7 @@ public class GameoverScreen extends ScreenBeta
 		    public boolean handle(Event event)
 		    {
 			    //Add screen transition
+				buttonClick.play();
 			    MyGame.setActiveScreen(new MainmenuScreen());
 			    return false;
 		    }

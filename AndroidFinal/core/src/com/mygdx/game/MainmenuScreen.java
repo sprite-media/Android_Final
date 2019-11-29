@@ -1,6 +1,7 @@
 package com.mygdx.game;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.scenes.scene2d.Event;
 import com.badlogic.gdx.scenes.scene2d.EventListener;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
@@ -24,6 +25,8 @@ public class MainmenuScreen extends ScreenBeta {
 
     //Title
     Label title;
+
+    Sound buttonClick;
 
     @Override
     public void initialize() {
@@ -76,6 +79,8 @@ public class MainmenuScreen extends ScreenBeta {
             defaultBackgroundMusic.play();
             defaultBackgroundMusic.setLooping(true);
         }
+        buttonClick = Gdx.audio.newSound(Gdx.files.internal("Audios/ButtonPressed.mp3"));
+        buttonClick.setVolume(0, volumeMultiplier);
 
         InitBtnListners();
     }
@@ -91,6 +96,7 @@ public class MainmenuScreen extends ScreenBeta {
             @Override
             public boolean handle(Event event) {
                 //TODO Implement GameplayScreen
+                buttonClick.play();
                 MyGame.setActiveScreen(new GameScreen());
                 return false;
             }
@@ -99,6 +105,7 @@ public class MainmenuScreen extends ScreenBeta {
         settingBtn.addListener(new EventListener() {
             @Override
             public boolean handle(Event event) {
+                buttonClick.play();
                 MyGame.setActiveScreen(new SettingScreen());
                 return false;
             }
@@ -109,6 +116,7 @@ public class MainmenuScreen extends ScreenBeta {
             @Override
             public boolean handle(Event event) {
                 //TODO Implement LeaderboardScreen
+                buttonClick.play();
                 MyGame.setActiveScreen(new LeaderboardScreen());
                 return false;
             }
@@ -117,6 +125,7 @@ public class MainmenuScreen extends ScreenBeta {
         quitBtn.addListener(new EventListener() {
             @Override
             public boolean handle(Event event) {
+                buttonClick.play();
                 System.exit(0);
                 return false;
             }

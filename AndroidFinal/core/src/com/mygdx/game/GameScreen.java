@@ -1,6 +1,7 @@
 package com.mygdx.game;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -52,10 +53,18 @@ public class GameScreen extends ScreenBeta
     Snake[] snakes;
     float speed;
 
+    Sound buttonClick;
+    Sound hitSound;
 
     @Override
     public void initialize()
     {
+        buttonClick = Gdx.audio.newSound(Gdx.files.internal("Audios/ButtonPressed.mp3"));
+        buttonClick.setVolume(0, volumeMultiplier);
+
+        hitSound = Gdx.audio.newSound(Gdx.files.internal("Audios/ButtonPressed.mp3"));
+        hitSound.setVolume(0, volumeMultiplier);
+
         SPEED = 500;
         isColliding = false;
         hitTime = 0.01f;
@@ -126,6 +135,7 @@ public class GameScreen extends ScreenBeta
                 mainStage.addActor(pauseScreen);
                 pauseScreen.ReactivatePasueScreen(mainStage, WINDOW_WIDTH, WINDOW_HEIGHT);
             }
+            buttonClick.play();
             isPuaseScreenOn = true;
             isPasueScreenCreated = true;
         }
@@ -153,6 +163,7 @@ public class GameScreen extends ScreenBeta
                 {
                     snakes[i].snakeNodes[j].blood.isActivated = true;
                     snakes[i].snakeNodes[j].blood.justKilled = false;
+                    hitSound.play();
                 }
                 snakes[i].DestoryInDelay(dt);
                 snakes[i].snakeNodes[j].blood.PlayAnimation(snakes[i].snakeNodes[j].getX(),

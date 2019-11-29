@@ -1,13 +1,11 @@
 package com.mygdx.game;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
-import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.Align;
-
-import javax.swing.GroupLayout;
 
 public class SnakeNode extends ActorBeta
 {
@@ -19,9 +17,13 @@ public class SnakeNode extends ActorBeta
     public int life = 0;
     public int killDmg = 0;
     public boolean doDestory = false;
+    public boolean isDead = false;
+    public Vector2 finalPos;
 
-    float frame = 0.05f;
+    float frame = 0.25f;
     float curFrame = 0.0f;
+
+    Blood blood;
 
     Skin skin;
 
@@ -35,6 +37,10 @@ public class SnakeNode extends ActorBeta
         lifeLabel.setFontScale(0.75f * ratio);
         lifeLabel.setAlignment(Align.center);
         lifeLabel.setPosition(x, y);
+
+        finalPos = new Vector2(0,0);
+
+        blood = new Blood(x, y, stage);
 
         stage.addActor(lifeLabel);
     }
@@ -52,26 +58,40 @@ public class SnakeNode extends ActorBeta
     {
         life -= _dmg;
         lifeLabel.setText(life);
+
         if(life <= 0)
         {
             life = 0;
             isEmpty = true;
-            loadTexture("Alpha.png");
+            isDead = true;
+            blood.justKilled = true;
+            finalPos.x = getX();
+            finalPos.y = getY();
             lifeLabel.setText("");
             return true;
         }
         return false;
     }
 
-    public void DestroyAtivated(float dt)
+    public void Reset()
     {
-        if(doDestory && life > 0)
+        lifeLabel.setText("");
+        isHead = false;
+        isEmpty = false;
+        doDestory = false;
+        imgFileName = null;
+    }
+
+    public void SetOffImg(float dt)
+    {
+        if(isDead)
         {
             curFrame += dt;
             if(curFrame >= frame)
             {
                 curFrame = 0;
-                GetHit(life);
+                loadTexture("Alpha.png");
+                isDead=  false;
             }
         }
     }

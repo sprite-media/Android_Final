@@ -10,7 +10,6 @@ public class Snake
 {
     public static int nodeNum;
     public float nodeSize;
-    boolean isPrevEmpty = false;
     public boolean isBelow;
 
     float curHeight;
@@ -18,6 +17,10 @@ public class Snake
     SnakeNode[] snakeNodes;
 
     Random random = new Random();
+
+    float doDestroyDelay = 0.35f;
+    float curDestroyDelay = 0.0f;
+
 
     public Snake(float y, Stage stage)
     {
@@ -41,11 +44,7 @@ public class Snake
         isBelow = false;
         for(int i = 0; i < nodeNum; i++)
         {
-            snakeNodes[i].lifeLabel.setText(" ");
-            snakeNodes[i].isHead = false;
-            snakeNodes[i].isEmpty = false;
-            snakeNodes[i].doDestory = false;
-            snakeNodes[i].imgFileName = null;
+            snakeNodes[i].Reset();
         }
 
         int tempNodeNum = nodeNum;
@@ -183,6 +182,12 @@ public class Snake
 
     public void HitSnake(int snakeNum, int dmg)
     {
+        if(snakeNodes[snakeNum].isHead && !snakeNodes[snakeNum].isEmpty)
+        {
+            snakeNodes[snakeNum].imgFileName = "Character/Snake/Head_hurt/Snake_Head_Hurt_" + snakeNodes[snakeNum].fileNumber + ".png";
+            snakeNodes[snakeNum].loadTexture(snakeNodes[snakeNum].imgFileName);
+            snakeNodes[snakeNum].setSize(nodeSize, nodeSize);
+        }
         if(snakeNodes[snakeNum].GetHit(dmg))
         {
             if(snakeNodes[snakeNum].isHead)
@@ -195,7 +200,32 @@ public class Snake
                         {
                             break;
                         }
-                        snakeNodes[i].doDestory = true;
+                        else
+                        {
+                            snakeNodes[i].doDestory = true;
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    public void DestoryInDelay(float dt)
+    {
+        for(int i = nodeNum - 1; i >= 0; i--)
+        {
+            if(snakeNodes[i].doDestory && snakeNodes[i].life > 0)
+            {
+                curDestroyDelay += dt;
+                if(curDestroyDelay >= doDestroyDelay)
+                {
+                    curDestroyDelay = 0;
+                    snakeNodes[i].GetHit(snakeNodes[i].life);
+                    if(i > 0)
+                    {
+                        if(!snakeNodes[i - 1].isEmpty && !snakeNodes[i-1].isHead)
+                            snakeNodes[i - 1].doDestory = true;
                     }
                 }
             }

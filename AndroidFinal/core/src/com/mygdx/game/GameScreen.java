@@ -26,7 +26,11 @@ public class GameScreen extends ScreenBeta
     final static float WINDOW_WIDTH     = Gdx.graphics.getWidth();
     final static float WINDOW_HEIGHT    = Gdx.graphics.getHeight();
     public static float SPEED;
+    public static float curSpeed;
+    public static float speedLevel;
+    float originSpeed;
     public static int curScore;
+    public static int scoreCount;
     boolean isColliding;
     float hitTime;
     float curHitTime;
@@ -67,7 +71,11 @@ public class GameScreen extends ScreenBeta
         hitSound = Gdx.audio.newSound(Gdx.files.internal("Audios/ButtonPressed.mp3"));
         hitSound.setVolume(0, volumeMultiplier);
 
-        SPEED = 500;
+        SPEED = 200;
+        originSpeed = 200;
+        curSpeed = 200;
+        speedLevel = 1;
+        scoreCount = 1;
         isColliding = false;
         hitTime = 0.01f;
         curHitTime = 0.0f;
@@ -129,6 +137,7 @@ public class GameScreen extends ScreenBeta
             snakes[i].SnakeMovement(SPEED * dt, WINDOW_HEIGHT - (WINDOW_WIDTH /6), mainStage);
         }
         character.Movement(speed * dt);
+        UpdateSpeed();
     }
 
     void ScreenInteraction()
@@ -213,6 +222,21 @@ public class GameScreen extends ScreenBeta
                 }
             }
         }
-        if(!isColliding) SPEED = 500;
+        if(!isColliding) SPEED = curSpeed;
+    }
+
+    public void UpdateSpeed()
+    {
+        if(curScore >= 150 * scoreCount)
+        {
+            scoreCount++;
+
+            if (speedLevel >= 5) return;
+
+            int temp = (int)(curScore / 100);
+            speedLevel = 1 + (0.1f * (float) temp);
+
+            curSpeed = originSpeed * speedLevel;
+        }
     }
 }

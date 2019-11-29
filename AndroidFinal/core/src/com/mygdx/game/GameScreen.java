@@ -1,13 +1,21 @@
 package com.mygdx.game;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Action;
+import com.badlogic.gdx.scenes.scene2d.ui.Button;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
+import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Align;
 
 import java.util.ArrayList;
@@ -27,7 +35,8 @@ public class GameScreen extends ScreenBeta
     Skin skin;
     Table HUDTable;
     Label scoreLabel;
-    TextButton pauseButton;
+    //TextButton pauseButton;
+    ImageButton pauseButton;
 
     int curScore;
 
@@ -65,12 +74,18 @@ public class GameScreen extends ScreenBeta
 
         curScore = 0;
 
-        pauseButton = new TextButton("Pause", skin);
-        pauseButton.getLabel().setFontScale(5 * ratio);
+        //pauseButton = new TextButton("Pause", skin);
+        //pauseButton.getLabel().setFontScale(5 * ratio);
+        Texture pauseTexture = new Texture("Textures/PauseButton.png");
+        TextureRegion pauseTextureRegion = new TextureRegion(pauseTexture);
+        TextureRegionDrawable pauseTextureRegionDrawable = new TextureRegionDrawable(pauseTextureRegion);
+        pauseTextureRegionDrawable.setMinWidth(WINDOW_WIDTH * 0.1f);
+        pauseTextureRegionDrawable.setMinHeight(WINDOW_HEIGHT * 0.1f);
+        pauseButton = new ImageButton(pauseTextureRegionDrawable);
+
 
         HUDTable.add(pauseButton).fill().expand().padRight(WINDOW_WIDTH * 0.55f);
         HUDTable.add(scoreLabel).fill().expandY();
-        mainStage.addActor(HUDTable);
 
         snakeNum = 3;
         gap = WINDOW_HEIGHT / snakeNum;
@@ -81,6 +96,8 @@ public class GameScreen extends ScreenBeta
         }
 
         character = new Character(WINDOW_WIDTH/2, WINDOW_HEIGHT/2, mainStage, this);
+
+        mainStage.addActor(HUDTable);
 
     }
 

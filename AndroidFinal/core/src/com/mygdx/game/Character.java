@@ -92,6 +92,12 @@ public class Character extends ActorBeta
         setAnimation(anim_wood);
     }
 
+    public Vector2 GetPlayerCenter()
+    {
+        center = new Vector2(getX() + (getWidth()/2), getY() + (getHeight()/2));
+        return center;
+    }
+
 
     public void ChangeAnim()
     {
@@ -124,6 +130,7 @@ public class Character extends ActorBeta
         life -= _dmg;
         ChangeAnim();
 
+        getStage().addActor(hitEffect);
         if(life <= 0)
         {
             MyGame.setActiveScreen(new GameoverScreen());

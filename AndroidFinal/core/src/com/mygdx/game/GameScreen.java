@@ -33,12 +33,16 @@ public class GameScreen extends ScreenBeta
     boolean isPuaseScreenOn = false;
     boolean isPasueScreenCreated = false;
 
+    //Player
     Character character;
+
+    //Snake
     int snakeNum;
     float gap;
     Snake[] snakes;
     //Snake snake;
     float speed;
+
 
     @Override
     public void initialize()
@@ -68,8 +72,7 @@ public class GameScreen extends ScreenBeta
         HUDTable.add(scoreLabel).fill().expandY();
         mainStage.addActor(HUDTable);
 
-        character = new Character(WINDOW_WIDTH/2, WINDOW_HEIGHT/10, mainStage, this);
-        //snake = new Snake(WINDOW_HEIGHT, mainStage);
+        //Snake
         snakeNum = 3;
         gap = WINDOW_HEIGHT / snakeNum;
         snakes = new Snake[snakeNum];
@@ -77,6 +80,9 @@ public class GameScreen extends ScreenBeta
         {
             snakes[i] = new Snake(WINDOW_HEIGHT + (i * gap), mainStage);
         }
+
+        //Character
+        character = new Character(WINDOW_WIDTH/2, WINDOW_HEIGHT/10, mainStage, this);
     }
 
     @Override

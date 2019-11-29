@@ -70,8 +70,25 @@ public class HitEffect extends ActorBeta {
         {
             setAnimation(anim_wood_Effect);
         }
-        setSize(player.getWidth()*1.7f, player.getHeight()*1.7f);
-        setPosition(player.getX() - (getWidth() - player.getWidth() )/2, player.getY());
+        size = new Vector2(10, 10);
+        size.x = Gdx.graphics.getWidth()/size.x;
+        size.y = Gdx.graphics.getWidth()/size.y;
+        setSize(size.x, size.y);
+        setPosition(player.getX(), player.getY());
+    }
+
+    @Override
+    public void act(float dt)
+    {
+        super.act(dt);
+
+        timer += dt;
+
+        if(timer > lifeTime)
+        {
+            timer = 0.0f;
+            remove();
+        }
     }
 
 }

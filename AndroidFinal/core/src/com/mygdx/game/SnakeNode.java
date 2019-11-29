@@ -1,13 +1,11 @@
 package com.mygdx.game;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
-import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.Align;
-
-import javax.swing.GroupLayout;
 
 public class SnakeNode extends ActorBeta
 {
@@ -17,6 +15,15 @@ public class SnakeNode extends ActorBeta
     public boolean isEmpty = false;
     public Label lifeLabel;
     public int life = 0;
+    public int killDmg = 0;
+    public boolean doDestory = false;
+    public boolean isDead = false;
+    public Vector2 finalPos;
+
+    float frame = 0.25f;
+    float curFrame = 0.0f;
+
+    Blood blood;
 
     Skin skin;
 
@@ -31,10 +38,11 @@ public class SnakeNode extends ActorBeta
         lifeLabel.setAlignment(Align.center);
         lifeLabel.setPosition(x, y);
 
+        finalPos = new Vector2(0,0);
+
+        blood = new Blood(x, y, stage);
 
         stage.addActor(lifeLabel);
-
-
     }
 
     public boolean Hit(Character character)
@@ -46,16 +54,46 @@ public class SnakeNode extends ActorBeta
         else return false;
     }
 
-    public void GetHit(int _dmg)
+    public boolean GetHit(int _dmg)
     {
         life -= _dmg;
         lifeLabel.setText(life);
+
         if(life <= 0)
         {
+            life = 0;
             isEmpty = true;
-            loadTexture("Alpha.png");
+            isDead = true;
+            blood.justKilled = true;
+            finalPos.x = getX();
+            finalPos.y = getY();
             lifeLabel.setText("");
+            return true;
         }
-
+        return false;
     }
+
+    public void Reset()
+    {
+        lifeLabel.setText("");
+        isHead = false;
+        isEmpty = false;
+        doDestory = false;
+        imgFileName = null;
+    }
+
+    public void SetOffImg(float dt)
+    {
+        if(isDead)
+        {
+            curFrame += dt;
+            if(curFrame >= frame)
+            {
+                curFrame = 0;
+                loadTexture("Alpha.png");
+                isDead=  false;
+            }
+        }
+    }
+
 }

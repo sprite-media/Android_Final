@@ -2,6 +2,7 @@ package com.mygdx.game;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Action;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
@@ -40,16 +41,15 @@ public class GameScreen extends ScreenBeta
     int snakeNum;
     float gap;
     Snake[] snakes;
-    //Snake snake;
     float speed;
 
 
     @Override
     public void initialize()
     {
-        SPEED = 200;
+        SPEED = 500;
         isColliding = false;
-        hitTime = 0.1f;
+        hitTime = 0.01f;
         curHitTime = 0.0f;
         //Ratio
         float ratio = fullWidth / 1080;
@@ -72,7 +72,6 @@ public class GameScreen extends ScreenBeta
         HUDTable.add(scoreLabel).fill().expandY();
         mainStage.addActor(HUDTable);
 
-        //Snake
         snakeNum = 3;
         gap = WINDOW_HEIGHT / snakeNum;
         snakes = new Snake[snakeNum];
@@ -81,22 +80,21 @@ public class GameScreen extends ScreenBeta
             snakes[i] = new Snake(WINDOW_HEIGHT + (i * gap), mainStage);
         }
 
-        //Character
-        character = new Character(WINDOW_WIDTH/2, WINDOW_HEIGHT/10, mainStage, this);
+        character = new Character(WINDOW_WIDTH/2, WINDOW_HEIGHT/2, mainStage, this);
+
     }
 
     @Override
     public void update(float dt)
     {
+        ScreenInteraction();
+        if(isPuaseScreenOn) return;
         CollistionCheck(dt);
-        character.moveBy((Gdx.input.getDeltaX()*dt*speed), 0);
-
-       // snake.SnakeMovement(200 * dt, WINDOW_HEIGHT, mainStage);
         for(int i = 0; i < snakeNum; i++)
         {
             snakes[i].SnakeMovement(SPEED * dt, WINDOW_HEIGHT - (WINDOW_WIDTH /6), mainStage);
         }
-        ScreenInteraction();
+        character.moveBy((Gdx.input.getDeltaX()*dt*speed), 0);
     }
 
     void ScreenInteraction()
@@ -135,6 +133,21 @@ public class GameScreen extends ScreenBeta
         {
             for(int j = 0; j < Snake.nodeNum; j++)
             {
+                snakes[i].snakeNodes[j].SetOffImg(dt);
+                if(snakes[i].snakeNodes[j].blood.justKilled)
+                {
+                    snakes[i].snakeNodes[j].blood.isActivated = true;
+                    snakes[i].snakeNodes[j].blood.justKilled = false;
+                    //snakes[i].snakeNodes[j].blood.setPosition(snakes[i].snakeNodes[j].getX(), snakes[i].snakeNodes[j].getY());
+                    //snakes[i].snakeNodes[j].blood.setPosition(
+                    //        (snakes[i].snakeNodes[j].getX() + snakes[i].snakeNodes[j].getWidth()/2)
+                    //                - snakes[i].snakeNodes[j].blood.getWidth()/2,
+                    //        (snakes[i].snakeNodes[j].getY() + snakes[i].snakeNodes[j].getHeight()/2)
+                    //                - snakes[i].snakeNodes[j].blood.getHeight()/2);
+                }
+                snakes[i].DestoryInDelay(dt);
+                snakes[i].snakeNodes[j].blood.PlayAnimation(snakes[i].snakeNodes[j].getX(),
+                        snakes[i].snakeNodes[j].getY(), dt);
                 if(!snakes[i].isBelow && snakes[i].snakeNodes[j].Hit(character))
                 {
                     curHitTime += dt;
@@ -142,7 +155,7 @@ public class GameScreen extends ScreenBeta
                     {
                         curHitTime = 0;
                         character.GetHit(1);
-                        snakes[i].snakeNodes[j].GetHit(1);
+                        snakes[i].HitSnake(j, 1);
                     }
                     isColliding = true;
                     SPEED = 0;
@@ -170,6 +183,6 @@ public class GameScreen extends ScreenBeta
                 }
             }
         }
-        if(!isColliding) SPEED = 200;
+        if(!isColliding) SPEED = 500;
     }
 }

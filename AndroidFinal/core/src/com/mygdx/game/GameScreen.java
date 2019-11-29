@@ -97,7 +97,7 @@ public class GameScreen extends ScreenBeta
         {
             snakes[i].SnakeMovement(SPEED * dt, WINDOW_HEIGHT - (WINDOW_WIDTH /6), mainStage);
         }
-        character.moveBy((Gdx.input.getDeltaX()*dt*speed), 0);
+        character.Movement(speed * dt);
     }
 
     void ScreenInteraction()
@@ -141,12 +141,6 @@ public class GameScreen extends ScreenBeta
                 {
                     snakes[i].snakeNodes[j].blood.isActivated = true;
                     snakes[i].snakeNodes[j].blood.justKilled = false;
-                    //snakes[i].snakeNodes[j].blood.setPosition(snakes[i].snakeNodes[j].getX(), snakes[i].snakeNodes[j].getY());
-                    //snakes[i].snakeNodes[j].blood.setPosition(
-                    //        (snakes[i].snakeNodes[j].getX() + snakes[i].snakeNodes[j].getWidth()/2)
-                    //                - snakes[i].snakeNodes[j].blood.getWidth()/2,
-                    //        (snakes[i].snakeNodes[j].getY() + snakes[i].snakeNodes[j].getHeight()/2)
-                    //                - snakes[i].snakeNodes[j].blood.getHeight()/2);
                 }
                 snakes[i].DestoryInDelay(dt);
                 snakes[i].snakeNodes[j].blood.PlayAnimation(snakes[i].snakeNodes[j].getX(),

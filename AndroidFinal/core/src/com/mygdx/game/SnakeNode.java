@@ -36,7 +36,7 @@ public class SnakeNode extends ActorBeta
         lifeLabel.setColor(0,0,0, 1);
         lifeLabel.setFontScale(0.75f * ratio);
         lifeLabel.setAlignment(Align.center);
-        lifeLabel.setPosition(x, y);
+        lifeLabel.setPosition(x + getWidth()/2, y + getHeight()/2);
 
         finalPos = new Vector2(0,0);
 

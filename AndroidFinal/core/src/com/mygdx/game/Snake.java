@@ -73,6 +73,8 @@ public class Snake
                     snakeNodes[idx].life = PassBeginLife(snakeNodes[idx].fileNumber);
                     snakeNodes[idx].killDmg = (int)snakeNodes[idx].life/5;
                     snakeNodes[idx].lifeLabel.setText(snakeNodes[idx].life);
+                    snakeNodes[idx].lifeLabel.setPosition(snakeNodes[idx].getX() + snakeNodes[idx].getWidth()/2,
+                            snakeNodes[idx].getY() + snakeNodes[idx].getHeight()/2);
                     snakeNodes[idx].imgFileName = "Character/Snake/Body/Snake_Body_" + snakeNodes[idx].fileNumber + ".png";
                 }
                 idx++;
@@ -172,7 +174,8 @@ public class Snake
         for(int i = 0; i < nodeNum; i++)
         {
             snakeNodes[i].setPosition(snakeNodes[i].getX(), curHeight);
-            snakeNodes[i].lifeLabel.setPosition(snakeNodes[i].getX() , snakeNodes[i].getY());
+            snakeNodes[i].lifeLabel.setPosition(snakeNodes[i].getX() + snakeNodes[i].getWidth()/3,
+                    snakeNodes[i].getY() + snakeNodes[i].getHeight()/4);
         }
         if(snakeNodes[0].getY() < Character.yPos)
         {

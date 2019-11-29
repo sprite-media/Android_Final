@@ -150,7 +150,7 @@ public class Character extends ActorBeta
     {
         //Player life
         lifeLabel.setText("" + life);
-        lifeLabel.setPosition(this.getX() + lifeLabel.getWidth(), this.getY() + lifeLabel.getHeight());
+        lifeLabel.setPosition(this.getX() - lifeLabel.getWidth()/3, this.getY() - lifeLabel.getHeight());
     }
 
     @Override
@@ -161,4 +161,12 @@ public class Character extends ActorBeta
         DisplayHud();
     }
 
+    public void Movement(float speed)
+    {
+        moveBy((Gdx.input.getDeltaX() *speed), 0);
+        if(getX() < 0)
+            setPosition(0, getY());
+        else if(getRight() > Gdx.graphics.getWidth())
+            setPosition(Gdx.graphics.getWidth() - getWidth(), getY());
+    }
 }

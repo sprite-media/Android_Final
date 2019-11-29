@@ -56,7 +56,7 @@ public class Character extends ActorBeta
         SetAnim();
 
         //Life
-        life = 1;
+        life = 20;
         Skin skin = new Skin(Gdx.files.internal("Skin/holo/skin/dark-hdpi/Holo-dark-hdpi.json"));
         lifeLabel = new Label("" + life, skin);
         lifeLabel.setFontScale(1 * ratio);
@@ -75,6 +75,7 @@ public class Character extends ActorBeta
 
         hitEffect = new HitEffect(this);
 
+        ChangeAnim();
         //Set boundary
         setBoundaryRectangle();
     }
@@ -89,8 +90,6 @@ public class Character extends ActorBeta
         anim_steel = this.loadAnimationFromFiles(steel, 1/10, false);
         diamond = new String[] {"Character/Player/Player_Diamond.png"};
         anim_diamond = this.loadAnimationFromFiles(diamond, 1/10f, false);
-
-        setAnimation(anim_wood);
     }
 
     public Vector2 GetPlayerCenter()

@@ -17,7 +17,7 @@ public class GameScreen extends ScreenBeta
     final static float WINDOW_WIDTH     = Gdx.graphics.getWidth();
     final static float WINDOW_HEIGHT    = Gdx.graphics.getHeight();
     public static float SPEED;
-
+    public static int curScore;
     boolean isColliding;
     float hitTime;
     float curHitTime;
@@ -29,7 +29,7 @@ public class GameScreen extends ScreenBeta
     Label scoreLabel;
     TextButton pauseButton;
 
-    int curScore;
+
 
     boolean isPuaseScreenOn = false;
     boolean isPasueScreenCreated = false;
@@ -62,10 +62,11 @@ public class GameScreen extends ScreenBeta
         HUDTable.setSize(WINDOW_WIDTH  , WINDOW_HEIGHT * 0.1f);
         HUDTable.setPosition(0, WINDOW_HEIGHT * 0.93f);
 
-        scoreLabel = new Label("0", skin);
+        curScore = 0;
+        scoreLabel = new Label("" + curScore, skin);
         scoreLabel.setFontScale(5 * ratio);
 
-        curScore = 0;
+
 
         pauseButton = new TextButton("Pause", skin);
         pauseButton.getLabel().setFontScale(5 * ratio);
@@ -87,9 +88,15 @@ public class GameScreen extends ScreenBeta
 
     }
 
+    public void HUD()
+    {
+        scoreLabel.setText("" + curScore);
+    }
+
     @Override
     public void update(float dt)
     {
+        HUD();
         ScreenInteraction();
         if(isPuaseScreenOn) return;
         CollistionCheck(dt);

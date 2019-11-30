@@ -97,12 +97,12 @@ public class GameScreen extends ScreenBeta
         Texture pauseTexture = new Texture("Textures/PauseButton.png");
         TextureRegion pauseTextureRegion = new TextureRegion(pauseTexture);
         TextureRegionDrawable pauseTextureRegionDrawable = new TextureRegionDrawable(pauseTextureRegion);
-        pauseTextureRegionDrawable.setMinWidth(WINDOW_WIDTH * 0.1f);
-        pauseTextureRegionDrawable.setMinHeight(WINDOW_HEIGHT * 0.1f);
+        pauseTextureRegionDrawable.setMinWidth(WINDOW_WIDTH * 0.07f);
+        pauseTextureRegionDrawable.setMinHeight(WINDOW_HEIGHT * 0.07f);
         pauseButton = new ImageButton(pauseTextureRegionDrawable);
+        pauseButton.setSize(WINDOW_WIDTH * 0.1f, WINDOW_WIDTH * 0.1f);
+        pauseButton.setPosition(0, WINDOW_HEIGHT - pauseButton.getHeight());
 
-
-        HUDTable.add(pauseButton).fill().expand().padRight(WINDOW_WIDTH * 0.55f);
         HUDTable.add(scoreLabel).fill().expandY();
 
         character = new Character(WINDOW_WIDTH/2, WINDOW_HEIGHT/2, mainStage, this);
@@ -117,7 +117,7 @@ public class GameScreen extends ScreenBeta
 
 
         mainStage.addActor(HUDTable);
-
+        mainStage.addActor(pauseButton);
     }
 
     public void HUD()

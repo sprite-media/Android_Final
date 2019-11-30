@@ -38,12 +38,8 @@ public class GameScreen extends ScreenBeta
     PasueScreen pauseScreen;
 
     Skin skin;
-    Table HUDTable;
     Label scoreLabel;
-    //TextButton pauseButton;
     ImageButton pauseButton;
-
-
 
     boolean isPuaseScreenOn = false;
     boolean isPasueScreenCreated = false;
@@ -62,6 +58,9 @@ public class GameScreen extends ScreenBeta
 
     //PowerUp
     PowerUp powerUp;
+
+    MovingBackground movingBackground;
+
     @Override
     public void initialize()
     {
@@ -84,26 +83,24 @@ public class GameScreen extends ScreenBeta
         speed = fullWidth * 0.05f;
 
         skin = new Skin(Gdx.files.internal("Skin/orange/skin/uiskin.json"));
-        HUDTable = new Table();
-        HUDTable.setSize(WINDOW_WIDTH  , WINDOW_HEIGHT * 0.1f);
-        HUDTable.setPosition(0, WINDOW_HEIGHT * 0.93f);
 
-        curScore = 0;
-        scoreLabel = new Label("" + curScore, skin);
-        scoreLabel.setFontScale(5 * ratio);
-
-
+        movingBackground = new MovingBackground(2, mainStage);
 
         Texture pauseTexture = new Texture("Textures/PauseButton.png");
         TextureRegion pauseTextureRegion = new TextureRegion(pauseTexture);
         TextureRegionDrawable pauseTextureRegionDrawable = new TextureRegionDrawable(pauseTextureRegion);
         pauseTextureRegionDrawable.setMinWidth(WINDOW_WIDTH * 0.07f);
-        pauseTextureRegionDrawable.setMinHeight(WINDOW_HEIGHT * 0.07f);
+        pauseTextureRegionDrawable.setMinHeight(WINDOW_WIDTH * 0.07f);
         pauseButton = new ImageButton(pauseTextureRegionDrawable);
         pauseButton.setSize(WINDOW_WIDTH * 0.1f, WINDOW_WIDTH * 0.1f);
         pauseButton.setPosition(0, WINDOW_HEIGHT - pauseButton.getHeight());
 
-        HUDTable.add(scoreLabel).fill().expandY();
+        curScore = 0;
+        scoreLabel = new Label("" + curScore, skin);
+        scoreLabel.setFontScale(5.0f * ratio);
+        scoreLabel.setSize(WINDOW_WIDTH * 0.4f, WINDOW_WIDTH * 0.1f);
+        scoreLabel.setPosition(pauseButton.getRight() + 30, WINDOW_HEIGHT - scoreLabel.getHeight());
+
 
         character = new Character(WINDOW_WIDTH/2, WINDOW_HEIGHT/2.5f, mainStage, this);
 
@@ -115,9 +112,8 @@ public class GameScreen extends ScreenBeta
             snakes[i] = new Snake(WINDOW_HEIGHT + (i * gap), mainStage, character);
         }
 
-
-        mainStage.addActor(HUDTable);
         mainStage.addActor(pauseButton);
+        mainStage.addActor(scoreLabel);
     }
 
     public void HUD()
@@ -132,6 +128,7 @@ public class GameScreen extends ScreenBeta
         ScreenInteraction();
         if(isPuaseScreenOn) return;
         CollistionCheck(dt);
+        movingBackground.BackgroundMovement(SPEED * dt);
         for(int i = 0; i < snakeNum; i++)
         {
             snakes[i].SnakeMovement(SPEED * dt, WINDOW_HEIGHT - (WINDOW_WIDTH /6), mainStage);

@@ -28,6 +28,8 @@ public class MainmenuScreen extends ScreenBeta {
 
     Sound buttonClick;
 
+    MovingBackground movingBackground;
+
     @Override
     public void initialize() {
         //Ratio
@@ -35,7 +37,7 @@ public class MainmenuScreen extends ScreenBeta {
 
         orangeSkin = new Skin(Gdx.files.internal("Skin/orange/skin/uiskin.json"));
 
-
+        movingBackground = new MovingBackground(2, mainStage);
         //Title
         title = new Label("BLOCK VS SNAKE", orangeSkin);
         title.setFontScale(5 * ratio);
@@ -87,7 +89,7 @@ public class MainmenuScreen extends ScreenBeta {
 
     @Override
     public void update(float dt) {
-
+        movingBackground.BackgroundMovement(300 * dt);
     }
 
     public void InitBtnListners()

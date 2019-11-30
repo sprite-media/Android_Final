@@ -105,7 +105,7 @@ public class GameScreen extends ScreenBeta
 
         HUDTable.add(scoreLabel).fill().expandY();
 
-        character = new Character(WINDOW_WIDTH/2, WINDOW_HEIGHT/2, mainStage, this);
+        character = new Character(WINDOW_WIDTH/2, WINDOW_HEIGHT/2.5f, mainStage, this);
 
         snakeNum = 3;
         gap = WINDOW_HEIGHT / snakeNum;

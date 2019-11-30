@@ -44,19 +44,19 @@ public class MainmenuScreen extends ScreenBeta {
 
         //Start Button
         startBtn = new TextButton("START", orangeSkin);
-        startBtn.getLabel().setFontScale(5 *ratio);
+        startBtn.getLabel().setFontScale(4 *ratio);
 
         //Setting Button
         settingBtn = new TextButton("SETTING", orangeSkin);
-        settingBtn.getLabel().setFontScale(5 *ratio);
+        settingBtn.getLabel().setFontScale(4 *ratio);
 
         //Leaderboard Button
         leaderboardBtn = new TextButton("LEADERBOARD", orangeSkin);
-        leaderboardBtn.getLabel().setFontScale(5*ratio);
+        leaderboardBtn.getLabel().setFontScale(4*ratio);
 
         //Quit Button
         quitBtn = new TextButton("QUIT", orangeSkin);
-        quitBtn.getLabel().setFontScale(5*ratio);
+        quitBtn.getLabel().setFontScale(4*ratio);
 
         //Table
         Table table = new Table();
@@ -90,6 +90,7 @@ public class MainmenuScreen extends ScreenBeta {
     @Override
     public void update(float dt) {
         movingBackground.BackgroundMovement(300 * dt);
+
     }
 
     public void InitBtnListners()

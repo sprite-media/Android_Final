@@ -57,7 +57,7 @@ public class GameoverScreen extends ScreenBeta
 
 	    table.add(gameoverText);
 	    table.row();
-	    table.add(scoreLabel).minSize(fullWidth, fullHeight*0.08f).padTop(halfHeight*0.6f).padLeft(halfWidth);
+	    table.add(scoreLabel).center().expand();
 	    table.row();
 		table.add(restartButton).minSize(halfWidth, fullHeight*0.08f).padTop(halfHeight*0.6f);
 		table.row();

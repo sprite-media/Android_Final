@@ -59,7 +59,7 @@ public class SettingScreen extends ScreenBeta {
 
         //Back Button
         backBtn = new TextButton("BACK", orangeSkin);
-        backBtn.getLabel().setFontScale(5*ratio);
+        backBtn.getLabel().setFontScale(4*ratio);
 
         //Table
         table = new Table();

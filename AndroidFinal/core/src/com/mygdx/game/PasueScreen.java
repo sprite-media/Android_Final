@@ -33,21 +33,21 @@ public class PasueScreen extends ActorBeta
         pauseTable = new Table();
         pauseTable.setSize(sizeX, sizeY);
         pauseTable.setPosition(0,0);
-        pauseTable.center();
+        //pauseTable.center();
 
         buttonClick = Gdx.audio.newSound(Gdx.files.internal("Audios/ButtonPressed.mp3"));
         buttonClick.setVolume(0, ScreenBeta.volumeMultiplier);
 
         pauseLabel = new Label("PAUSE", skin);
-        pauseLabel.setFontScale(10 * ratio);
+        pauseLabel.setFontScale(5 * ratio);
         restartButton = new TextButton("RESTART", skin);
-        restartButton.getLabel().setFontScale(5 * ratio);
+        restartButton.getLabel().setFontScale(4 * ratio);
         backToMainButton = new TextButton("BACK TO MAIN MENU", skin);
-        backToMainButton.getLabel().setFontScale(5 * ratio);
+        backToMainButton.getLabel().setFontScale(4 * ratio);
 
-        pauseTable.add(pauseLabel).minHeight(Gdx.graphics.getWidth()/10.0f).minWidth(Gdx.graphics.getWidth()/2.0f).padBottom(Gdx.graphics.getHeight()/10.0f).align(0).row();
-        pauseTable.add(restartButton).minHeight(Gdx.graphics.getWidth()/10.0f).minWidth(Gdx.graphics.getWidth()/2.0f).padBottom(Gdx.graphics.getHeight()/25.0f).row();
-        pauseTable.add(backToMainButton).minHeight(Gdx.graphics.getWidth()/10.0f).minWidth(Gdx.graphics.getWidth()/2.0f).padBottom(Gdx.graphics.getHeight()/25.0f).row();
+        pauseTable.add(pauseLabel).minHeight(Gdx.graphics.getWidth()/10.0f).minWidth(Gdx.graphics.getWidth()/5).padBottom(Gdx.graphics.getHeight()/10.0f).row();
+        pauseTable.add(restartButton).minHeight(Gdx.graphics.getWidth()/10.0f).minWidth(Gdx.graphics.getWidth()/5).padBottom(Gdx.graphics.getHeight()/25.0f).row();
+        pauseTable.add(backToMainButton).minHeight(Gdx.graphics.getWidth()/10.0f).minWidth(Gdx.graphics.getWidth()/5).padBottom(Gdx.graphics.getHeight()/25.0f).row();
         pauseTable.setColor(1, 1, 1,0);
         pauseTable.addAction(Actions.fadeIn(1.0f));
 

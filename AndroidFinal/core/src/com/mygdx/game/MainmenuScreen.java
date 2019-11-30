@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.scenes.scene2d.Event;
 import com.badlogic.gdx.scenes.scene2d.EventListener;
+import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
@@ -29,6 +30,9 @@ public class MainmenuScreen extends ScreenBeta {
     Sound buttonClick;
 
     MovingBackground movingBackground;
+
+    float buttonTimer = 0;
+    int curButton = 0;
 
     @Override
     public void initialize() {
@@ -83,55 +87,61 @@ public class MainmenuScreen extends ScreenBeta {
         }
         buttonClick = Gdx.audio.newSound(Gdx.files.internal("Audios/ButtonPressed.mp3"));
         buttonClick.setVolume(0, volumeMultiplier);
-
-        InitBtnListners();
     }
+
 
     @Override
     public void update(float dt) {
         movingBackground.BackgroundMovement(300 * dt);
-
+        ButtonPressed(dt);
     }
 
-    public void InitBtnListners()
+    void ButtonPressed(float dt)
     {
-        startBtn.addListener(new EventListener() {
-            @Override
-            public boolean handle(Event event) {
-                //TODO Implement GameplayScreen
-                buttonClick.play();
-                MyGame.setActiveScreen(new GameScreen());
-                return false;
-            }
-        });
+        if(startBtn.isPressed())
+        {
+            buttonTimer = 0.0f;
+            curButton = 1;
+        }
+        else if(settingBtn.isPressed())
+        {
+            buttonTimer = 0.0f;
+            curButton = 2;
+        }
+        else if(leaderboardBtn.isPressed())
+        {
+            buttonTimer = 0.0f;
+            curButton = 3;
+        }
+        else if(quitBtn.isPressed())
+        {
+            buttonTimer = 0.0f;
+            curButton = 4;
+        }
 
-        settingBtn.addListener(new EventListener() {
-            @Override
-            public boolean handle(Event event) {
-                buttonClick.play();
-                MyGame.setActiveScreen(new SettingScreen());
-                return false;
-            }
-        });
+        if(curButton != 0 ) buttonTimer += dt;
 
-
-        leaderboardBtn.addListener(new EventListener() {
-            @Override
-            public boolean handle(Event event) {
-                //TODO Implement LeaderboardScreen
-                buttonClick.play();
-                MyGame.setActiveScreen(new LeaderboardScreen());
-                return false;
+        if(buttonTimer >= 0.2f)
+        {
+            buttonClick.play();
+            switch (curButton)
+            {
+                case 0:
+                    buttonTimer = 0.0f;
+                    break;
+                case 1:
+                    MyGame.setActiveScreen(new GameScreen());
+                    break;
+                case 2:
+                    MyGame.setActiveScreen(new SettingScreen());
+                    break;
+                case 3:
+                    MyGame.setActiveScreen(new LeaderboardScreen());
+                    break;
+                case 4:
+                    System.exit(0);
+                    break;
             }
-        });
-
-        quitBtn.addListener(new EventListener() {
-            @Override
-            public boolean handle(Event event) {
-                buttonClick.play();
-                System.exit(0);
-                return false;
-            }
-        });
+        }
     }
 }

@@ -20,12 +20,18 @@ public class PasueScreen extends ActorBeta
 
     Sound buttonClick;
 
+    int curButton;
+    float buttonTimer;
+
     public PasueScreen(float x, float y, float sizeX, float sizeY, Stage stage, Skin skin)
     {
         super(x, y, stage);
 
         loadTexture("PauseScreenBg.png");
         setSize(sizeX, sizeY);
+
+        curButton = 0;
+        buttonTimer = 0.0f;
 
         //Ratio
         float ratio = Gdx.graphics.getWidth() / 1080.0f;
@@ -79,15 +85,20 @@ public class PasueScreen extends ActorBeta
     public void ReactivatePasueScreen(Stage stage, float sizeX, float sizeY)
     {
         buttonClick.play();
-        int heightSegment = 10;
 
         pauseTable = new Table();
         pauseTable.setSize(sizeX, sizeY);
         pauseTable.setPosition(0,0);
 
-        pauseTable.add(pauseLabel).fill().expand().padBottom(sizeY/heightSegment*3).row();
-        pauseTable.add(restartButton).fill().padBottom(sizeY/heightSegment).row();
-        pauseTable.add(backToMainButton).fill().padBottom(sizeY/heightSegment).row();
+        //Ratio
+        float ratio = Gdx.graphics.getWidth() / 1080.0f;
+        pauseLabel.setFontScale(5 * ratio);
+        restartButton.getLabel().setFontScale(4 * ratio);
+        backToMainButton.getLabel().setFontScale(4 * ratio);
+
+        pauseTable.add(pauseLabel).minHeight(Gdx.graphics.getWidth()/10.0f).minWidth(Gdx.graphics.getWidth()/5).padBottom(Gdx.graphics.getHeight()/10.0f).row();
+        pauseTable.add(restartButton).fill().minHeight(Gdx.graphics.getWidth()/10.0f).minWidth(Gdx.graphics.getWidth()/5).padBottom(Gdx.graphics.getHeight()/25.0f).row();
+        pauseTable.add(backToMainButton).minHeight(Gdx.graphics.getWidth()/10.0f).minWidth(Gdx.graphics.getWidth()/5).padBottom(Gdx.graphics.getHeight()/25.0f).row();
         pauseTable.setColor(1, 1, 1,0);
         pauseTable.addAction(Actions.fadeIn(1.0f));
 

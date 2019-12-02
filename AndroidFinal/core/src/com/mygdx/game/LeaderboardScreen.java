@@ -24,6 +24,9 @@ public class LeaderboardScreen extends ScreenBeta
 
 	Sound buttonClick;
 
+	int curButton;
+	float buttonTimer;
+
 	@Override
 	public void initialize()
 	{
@@ -68,28 +71,40 @@ public class LeaderboardScreen extends ScreenBeta
 			table.row();
 		}
 
-		InitButton();
-		mainStage.addActor(table);
-	}
+		curButton = 0;
+		buttonTimer = 0.0f;
 
-	public void InitButton()
-	{
-		back.addListener(new EventListener()
-	{
-		@Override
-		public boolean handle(Event event)
-		{
-			//Add screen transition
-			buttonClick.play();
-			MyGame.setActiveScreen(new MainmenuScreen());
-			return false;
-		}
-	});
+		mainStage.addActor(table);
 	}
 
 	@Override
 	public void update(float dt)
 	{
+		ButtonPressed(dt);
+	}
 
+	void ButtonPressed(float dt)
+	{
+		if(back.isPressed())
+		{
+			buttonTimer = 0.0f;
+			curButton = 1;
+		}
+
+		if(curButton != 0 ) buttonTimer += dt;
+
+		if(buttonTimer >= 0.2f)
+		{
+			buttonClick.play();
+			switch (curButton)
+			{
+				case 0:
+					buttonTimer = 0.0f;
+					break;
+				case 1:
+					MyGame.setActiveScreen(new MainmenuScreen());
+					break;
+			}
+		}
 	}
 }

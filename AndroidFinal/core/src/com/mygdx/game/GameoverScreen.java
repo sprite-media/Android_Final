@@ -20,11 +20,16 @@ public class GameoverScreen extends ScreenBeta
 
 	Sound buttonClick;
 
+	int curButton;
+	float buttonTimer;
 
     @Override
     public void initialize()
     {
 		float ratio = fullWidth / 400.0f;
+
+		curButton = 0;
+		buttonTimer = 0.0f;
 
 		// Loading skin
 		orange = new Skin(Gdx.files.internal("Skin/orange/skin/uiskin.json"));
@@ -50,7 +55,7 @@ public class GameoverScreen extends ScreenBeta
 	    mainmenuButton = new TextButton("To Main Menu", orange);
 	    mainmenuButton.getLabel().setFontScale(1.8f * ratio);
 
-	    InitButton();
+	    //InitButton();
 
 		buttonClick = Gdx.audio.newSound(Gdx.files.internal("Audios/ButtonPressed.mp3"));
 		buttonClick.setVolume(0, volumeMultiplier);
@@ -68,36 +73,69 @@ public class GameoverScreen extends ScreenBeta
 		mainStage.addActor(table);
     }
 
-    public void InitButton()
-    {
-    	restartButton.addListener(new EventListener()
-	    {
-		    @Override
-		    public boolean handle(Event event)
-		    {
-			    //Add screen transition
-				buttonClick.play();
-			    MyGame.setActiveScreen(new GameScreen());
-			    return false;
-		    }
-	    });
-
-    	mainmenuButton.addListener(new EventListener()
-	    {
-		    @Override
-		    public boolean handle(Event event)
-		    {
-			    //Add screen transition
-				buttonClick.play();
-			    MyGame.setActiveScreen(new MainmenuScreen());
-			    return false;
-		    }
-	    });
-    }
+    //public void InitButton()
+    //{
+    //	restartButton.addListener(new EventListener()
+	//    {
+	//	    @Override
+	//	    public boolean handle(Event event)
+	//	    {
+	//		    //Add screen transition
+	//			buttonClick.play();
+	//		    MyGame.setActiveScreen(new GameScreen());
+	//		    return false;
+	//	    }
+	//    });
+//
+    //	mainmenuButton.addListener(new EventListener()
+	//    {
+	//	    @Override
+	//	    public boolean handle(Event event)
+	//	    {
+	//		    //Add screen transition
+	//			buttonClick.play();
+	//		    MyGame.setActiveScreen(new MainmenuScreen());
+	//		    return false;
+	//	    }
+	//    });
+    //}
 
     @Override
     public void update(float dt)
     {
-
+		ButtonPressed(dt);
     }
+
+	void ButtonPressed(float dt)
+	{
+		if(restartButton.isPressed())
+		{
+			buttonTimer = 0.0f;
+			curButton = 1;
+		}
+		else if(mainmenuButton.isPressed())
+		{
+			buttonTimer = 0.0f;
+			curButton = 2;
+		}
+
+		if(curButton != 0 ) buttonTimer += dt;
+
+		if(buttonTimer >= 0.2f)
+		{
+			buttonClick.play();
+			switch (curButton)
+			{
+				case 0:
+					buttonTimer = 0.0f;
+					break;
+				case 1:
+					MyGame.setActiveScreen(new GameScreen());
+					break;
+				case 2:
+					MyGame.setActiveScreen(new MainmenuScreen());
+					break;
+			}
+		}
+	}
 }

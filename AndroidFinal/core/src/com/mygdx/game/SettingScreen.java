@@ -35,6 +35,9 @@ public class SettingScreen extends ScreenBeta {
 
     Sound buttonClick;
 
+    int curButton;
+    float buttonTimer;
+
     @Override
     public void initialize() {
         //Aspect
@@ -75,27 +78,45 @@ public class SettingScreen extends ScreenBeta {
 
         uiStage.addActor(table);
 
+        curButton = 0;
+        buttonTimer = 0.0f;
 
         InitBtnListners();
     }
 
     @Override
     public void update(float dt) {
+        ButtonPressed(dt);
+    }
 
+    void ButtonPressed(float dt)
+    {
+        if(backBtn.isPressed())
+        {
+            buttonTimer = 0.0f;
+            curButton = 1;
+        }
+
+        if(curButton != 0 ) buttonTimer += dt;
+
+        if(buttonTimer >= 0.2f)
+        {
+            buttonClick.play();
+            switch (curButton)
+            {
+                case 0:
+                    buttonTimer = 0.0f;
+                    break;
+                case 1:
+                    MyGame.setActiveScreen(new MainmenuScreen());
+                    break;
+            }
+        }
     }
 
 
     public void InitBtnListners()
     {
-        backBtn.addListener(new EventListener() {
-            @Override
-            public boolean handle(Event event) {
-                buttonClick.play();
-                MyGame.setActiveScreen(new MainmenuScreen());
-                return false;
-            }
-        });
-
         volumeSlider.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
